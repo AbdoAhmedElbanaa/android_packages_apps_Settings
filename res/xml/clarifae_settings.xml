@@ -16,6 +16,12 @@
         android:order="-100"
         settings:controller="com.android.settings.sound.clarifae.ClarifaeMainSwitchPreferenceController" />
 
+    <!-- Action Buttons (Apply & Restart Audio) -->
+    <com.android.settingslib.widget.ActionButtonsPreference
+        android:key="clarifae_action_buttons"
+        android:order="-90"
+        settings:controller="com.android.settings.sound.clarifae.ClarifaeActionButtonsPreferenceController" />
+
     <!-- Microphone Clarity (Input) -->
     <PreferenceCategory
         android:key="clarifae_mic_category"

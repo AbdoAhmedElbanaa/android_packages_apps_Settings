@@ -386,6 +386,8 @@ public class SimDialogActivity extends FragmentActivity {
 
     private void setPreferredSim(final int subId) {
         setDefaultDataSubId(subId);
+        setDefaultCallsSubId(subId);
+        setDefaultSmsSubId(subId);
     }
 
     private PhoneAccountHandle subscriptionIdToPhoneAccountHandle(final int subId) {

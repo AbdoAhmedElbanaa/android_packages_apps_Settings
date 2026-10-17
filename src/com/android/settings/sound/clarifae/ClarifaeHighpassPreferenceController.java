@@ -29,6 +29,7 @@ public class ClarifaeHighpassPreferenceController extends TogglePreferenceContro
     @Override
     public boolean setChecked(boolean isChecked) {
         ClarifaeManager.setHighpassEnabled(isChecked);
+        ClarifaeManager.applySettings(mContext);
         return true;
     }
 

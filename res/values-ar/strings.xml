@@ -6330,4 +6330,12 @@
     <string name="clarifae_autogain_summary">"رفع ذكي لمستوى صوت المتحدثين البعيدين عن الهاتف"</string>
     <string name="clarifae_info_footer">"تستخدم ميزة نقاء الصوت شبكة RNNoise العصبية المدعومة بتسريع ARM NEON العتادي على معالج Snapdragon 720G لعزل الضوضاء في الوقت الفعلي بتأخير أقل من 12 ملي ثانية واستهلاك معالج لا يتعدى 2%. تُطبّق التغييرات لحظياً دون الحاجة لإعادة التشغيل."</string>
     <string name="keywords_clarifae">"عزل الضوضاء، نقاء الصوت، ميكروفون، ذكاء اصطناعي، صوت نقي، إلغاء الضجيج، clarifae, denoise"</string>
+
+    <!-- Audio Action Buttons -->
+    <string name="audio_apply_changes">"تطبيق الإعدادات"</string>
+    <string name="audio_restart_service">"إعادة تشغيل الصوت"</string>
+    <string name="dual_audio_applied_toast">"تم حفظ وتطبيق إعدادات الصوت المزدوج بنجاح"</string>
+    <string name="dual_audio_restarted_toast">"تمت إعادة تشغيل خدمة الصوت وتطبيق الإعدادات"</string>
+    <string name="clarifae_applied_toast">"تم حفظ وتطبيق إعدادات نقاء الصوت بنجاح"</string>
+    <string name="clarifae_restarted_toast">"تمت إعادة تشغيل خدمة الصوت وتطبيق نقاء الصوت"</string>
 </resources>

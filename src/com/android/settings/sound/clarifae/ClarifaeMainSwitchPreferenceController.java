@@ -43,6 +43,7 @@ public class ClarifaeMainSwitchPreferenceController extends TogglePreferenceCont
         try {
             ClarifaeManager.setEnabled(isChecked);
             updateDependentPreferences(isChecked);
+            ClarifaeManager.applySettings(mContext);
             return true;
         } catch (Exception e) {
             Log.e(TAG, "Error in setChecked: " + e.getMessage(), e);

@@ -226,6 +226,17 @@ public class SimSelectNotification extends BroadcastReceiver {
             return;
         }
 
+        SubscriptionManager subscriptionManager = context.getSystemService(SubscriptionManager.class);
+        if (dialogType == EXTRA_DEFAULT_SUBSCRIPTION_SELECT_TYPE_DATA
+                && subscriptionManager != null
+                && SubscriptionManager.isValidSubscriptionId(
+                        SubscriptionManager.getDefaultDataSubscriptionId())
+                && subscriptionManager.isActiveSubscriptionId(
+                        SubscriptionManager.getDefaultDataSubscriptionId())) {
+            Log.d(TAG, "Default data sub is already valid and active, skip notification");
+            return;
+        }
+
         // Create a notification to tell the user that some defaults are missing
         createSimSelectNotification(context);
 

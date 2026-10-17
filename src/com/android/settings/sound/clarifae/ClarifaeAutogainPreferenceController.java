@@ -29,6 +29,7 @@ public class ClarifaeAutogainPreferenceController extends TogglePreferenceContro
     @Override
     public boolean setChecked(boolean isChecked) {
         ClarifaeManager.setAutogainEnabled(isChecked);
+        ClarifaeManager.applySettings(mContext);
         return true;
     }
 

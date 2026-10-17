@@ -15697,4 +15697,12 @@
     <string name="clarifae_autogain_summary">Gently boosts quiet speech levels for distant speakers</string>
     <string name="clarifae_info_footer">Clarifae uses the lightweight RNNoise neural network accelerated by ARM NEON on Snapdragon 720G to denoise audio in real time with less than 12ms latency and under 2% CPU load. Changes apply immediately to active and new audio streams.</string>
     <string name="keywords_clarifae">clarifae, noise suppression, noise cancellation, voice clarity, ai audio, mic clean, rnnoise, denoise</string>
+
+    <!-- Audio Action Buttons -->
+    <string name="audio_apply_changes">Apply changes</string>
+    <string name="audio_restart_service">Restart audio</string>
+    <string name="dual_audio_applied_toast">Dual audio settings applied successfully</string>
+    <string name="dual_audio_restarted_toast">Audio service reloaded &amp; settings applied</string>
+    <string name="clarifae_applied_toast">AI voice clarity settings applied successfully</string>
+    <string name="clarifae_restarted_toast">Audio service reloaded &amp; clarity applied</string>
 </resources>

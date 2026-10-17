@@ -29,6 +29,7 @@ public class ClarifaePlaybackSwitchPreferenceController extends TogglePreference
     @Override
     public boolean setChecked(boolean isChecked) {
         ClarifaeManager.setOutEnabled(isChecked);
+        ClarifaeManager.applySettings(mContext);
         return true;
     }
 

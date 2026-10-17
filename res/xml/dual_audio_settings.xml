@@ -15,6 +15,12 @@
         android:order="-100"
         settings:controller="com.android.settings.sound.dualaudio.DualAudioMainSwitchPreferenceController" />
 
+    <!-- Action Buttons (Apply & Restart Audio) -->
+    <com.android.settingslib.widget.ActionButtonsPreference
+        android:key="dual_audio_action_buttons"
+        android:order="-90"
+        settings:controller="com.android.settings.sound.dualaudio.DualAudioActionButtonsPreferenceController" />
+
     <PreferenceCategory
         android:key="dual_audio_presets_category"
         android:title="@string/dual_audio_preset_category"

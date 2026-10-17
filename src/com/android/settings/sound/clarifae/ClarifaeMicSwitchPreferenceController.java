@@ -29,6 +29,7 @@ public class ClarifaeMicSwitchPreferenceController extends TogglePreferenceContr
     @Override
     public boolean setChecked(boolean isChecked) {
         ClarifaeManager.setInEnabled(isChecked);
+        ClarifaeManager.applySettings(mContext);
         return true;
     }
 
