@@ -15598,7 +15598,103 @@
     <string name="permit_access_hid">Allow app to discover human interface devices (HIDs)</string>
     <!-- Description for a setting which controls whether an app can access HIDs [CHAR LIMIT=NONE] [SCREENSHOT=screen/9b4PwXWD4S9XWhD] -->
     <string name="allow_access_hid_description">If you allow access, malicious apps may reprogram your HIDs to compromise your system. For example, apps could simulate your keyboard or mouse inputs to control your system when it isn\'t open. Make sure you trust apps when allowing access.</string>
-    <!-- Search keywords for Human interface device access setting -->
-    <string name="keywords_access_hid">hid, human, access, device</string>
-    <!-- Access HID end -->
+    <!-- Search keywords for HID access screen [CHAR LIMIT=NONE] -->
+    <string name="keywords_access_hid">"hid, human, access, device"</string>
+    <!-- RisingOS - Battery Information screen -->
+    <string name="battery_realtime_category">Live status</string>
+    <string name="battery_hardware_category">Hardware info</string>
+    <string name="battery_charging_status">Charging status</string>
+    <string name="battery_current">Current</string>
+    <string name="battery_charge_counter">Remaining charge</string>
+    <string name="battery_charge_type">Charge type</string>
+
+    <!-- Battery Information screen - Charging status values -->
+    <string name="battery_status_charging">Charging</string>
+    <string name="battery_status_discharging">Discharging</string>
+    <string name="battery_status_not_charging">Not charging</string>
+    <string name="battery_status_full">Full</string>
+    <string name="battery_status_unknown">Unknown</string>
+
+    <!-- Battery Information screen - Plugged source -->
+    <string name="battery_plugged_ac">AC power</string>
+    <string name="battery_plugged_usb">USB</string>
+    <string name="battery_plugged_wireless">Wireless</string>
+
+    <!-- Battery Information screen - Charging type values (Qualcomm SMB5) -->
+    <string name="battery_charge_type_none">Not charging</string>
+    <string name="battery_charge_type_sdp">Standard (SDP)</string>
+    <string name="battery_charge_type_cdp">Charging Downstream Port (CDP)</string>
+    <string name="battery_charge_type_dcp">Dedicated Charging Port (DCP)</string>
+    <string name="battery_charge_type_float">Float charger</string>
+    <string name="battery_charge_type_ocp">Non-compliant charger</string>
+    <string name="battery_charge_type_qc2">Quick Charge 2.0</string>
+    <string name="battery_charge_type_qc3">Quick Charge 3.0</string>
+    <string name="battery_charge_type_qc3p5">Quick Charge 3.5</string>
+    <string name="battery_charge_type_pd">USB Power Delivery (PD)</string>
+
+    <!-- Battery Information screen - Generic not available -->
+    <string name="battery_info_not_available">Not available</string>
+
+    <!-- Bypass charging -->
+    <string name="bypass_charging_title">Enable bypass charging</string>
+    <string name="bypass_charging_summary_on">Active — device powered directly from adapter, battery idle</string>
+    <string name="bypass_charging_summary_off">Disabled — charging normally through battery</string>
+    <string name="bypass_charging_summary_unplugged">Connect a charger to use bypass charging</string>
+    <string name="bypass_charging_unavailable">Not supported on this device</string>
+    <string name="bypass_charging_status_direct">Direct power (Bypass charging)</string>
+
+    <!-- Bypass Charging Settings Page (standalone) -->
+    <string name="bypass_charging_settings_title">Bypass charging</string>
+    <string name="bypass_charging_entry_summary_on">On \u2014 battery idle, powered from adapter</string>
+    <string name="bypass_charging_entry_summary_off">Off</string>
+    <string name="bypass_charging_live_status">Live charging status</string>
+    <string name="bypass_charging_footer">Bypass charging routes power directly from the adapter to the device, keeping the battery at its current level. This reduces heat and battery wear during extended use while plugged in. Requires a USB Power Delivery (PD) or Quick Charge compatible adapter. Disable this mode before unplugging to avoid unexpected shutdown.</string>
+    <string name="keywords_bypass_charging">bypass charging, battery idle, charge suspend, input suspend, trickle charge</string>
+
+    <!-- Dual Audio -->
+    <string name="dual_audio_title">Dual audio</string>
+    <string name="dual_audio_summary">Use earpiece as a secondary speaker for stereo sound</string>
+    <string name="dual_audio_summary_on">On \u2022 %1$s</string>
+    <string name="dual_audio_summary_off">Off</string>
+    <string name="dual_audio_master_switch_title">Use dual audio</string>
+    <string name="dual_audio_master_switch_summary">Outputs media audio through both the top earpiece and bottom loudspeaker</string>
+    <string name="dual_audio_preset_category">Audio presets</string>
+    <string name="dual_audio_preset_title">Sound profile preset</string>
+    <string name="dual_audio_preset_dialog_title">Select audio preset</string>
+    <string name="dual_audio_tuning_category">Balance &amp; gain tuning</string>
+    <string name="dual_audio_earpiece_gain_title">Earpiece hardware gain</string>
+    <string name="dual_audio_earpiece_gain_dialog_title">Select earpiece gain level</string>
+    <string name="dual_audio_speaker_balance_title">Speaker balance</string>
+    <string name="dual_audio_speaker_balance_dialog_title">Select balance ratio</string>
+    <string name="dual_audio_info_footer">Dual audio utilizes the earpiece receiver alongside the bottom speaker to create a wider stereo soundstage. Audio routing automatically pauses during phone and voice calls to protect hearing and prevent microphone acoustic echo. Changes take effect immediately without requiring a restart.</string>
+    <string name="keywords_dual_audio">dual audio, stereo speaker, earpiece speaker, dual speaker, sound balance, speaker boost</string>
+
+    <!-- AI Voice Clarity (Clarifae) -->
+    <string name="clarifae_title">AI voice clarity</string>
+    <string name="clarifae_summary">Real-time AI speech enhancement and background noise suppression</string>
+    <string name="clarifae_summary_on">On \u2022 %1$s</string>
+    <string name="clarifae_summary_off">Off</string>
+    <string name="clarifae_master_switch_title">Use AI audio clarity</string>
+    <string name="clarifae_master_switch_summary">Enhance speech and suppress background noise using neural speech models</string>
+    <string name="clarifae_mic_category">Microphone clarity (Input)</string>
+    <string name="clarifae_in_enabled_title">Clean microphone audio</string>
+    <string name="clarifae_in_enabled_summary">Cleans your outgoing voice on calls, VoIP, and recordings</string>
+    <string name="clarifae_strength_title">Microphone suppression strength</string>
+    <string name="clarifae_strength_summary">Neural noise suppression intensity for microphone input (%1$d%%)</string>
+    <string name="clarifae_playback_category">Playback clarity (Output)</string>
+    <string name="clarifae_out_enabled_title">Clean received audio</string>
+    <string name="clarifae_out_enabled_summary">Cleans caller voice heard through earpiece or speakers</string>
+    <string name="clarifae_out_strength_title">Playback suppression strength</string>
+    <string name="clarifae_out_strength_summary">Neural noise suppression intensity for playback audio (%1$d%%)</string>
+    <string name="clarifae_advanced_category">Advanced acoustic tuning</string>
+    <string name="clarifae_atten_db_title">Maximum suppression limit</string>
+    <string name="clarifae_atten_db_summary">Caps aggressive noise attenuation to preserve natural timbre (%1$d dB)</string>
+    <string name="clarifae_vad_title">Voice activity sensitivity (Gate)</string>
+    <string name="clarifae_vad_summary">Voice detection threshold for silent interval noise gating (%1$d%%)</string>
+    <string name="clarifae_highpass_title">High-pass rumble filter</string>
+    <string name="clarifae_highpass_summary">Filters out low rumble, wind, and DC offset below 80 Hz</string>
+    <string name="clarifae_autogain_title">Auto speech makeup gain</string>
+    <string name="clarifae_autogain_summary">Gently boosts quiet speech levels for distant speakers</string>
+    <string name="clarifae_info_footer">Clarifae uses the lightweight RNNoise neural network accelerated by ARM NEON on Snapdragon 720G to denoise audio in real time with less than 12ms latency and under 2% CPU load. Changes apply immediately to active and new audio streams.</string>
+    <string name="keywords_clarifae">clarifae, noise suppression, noise cancellation, voice clarity, ai audio, mic clean, rnnoise, denoise</string>
 </resources>

@@ -6350,6 +6350,20 @@
                 android:value="android.service.quicksettings.CATEGORY_CONNECTIVITY" />
         </service>
 
+        <!-- Clarifae AI Clarity Quick Settings Tile -->
+        <service
+            android:name=".sound.clarifae.ClarifaeTileService"
+            android:label="@string/clarifae_title"
+            android:icon="@drawable/ic_clarifae"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+            <meta-data android:name="android.service.quicksettings.TOGGLEABLE_TILE"
+                       android:value="true"/>
+        </service>
+
         <activity
             android:name="com.android.settings.network.telephony.satellite.quicksettings.SatelliteLandingPageActivity"
             android:label="@string/satellite_landing_page_label"

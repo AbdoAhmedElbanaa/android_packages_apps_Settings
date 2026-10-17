@@ -532,4 +532,32 @@
     <item msgid="5687603742365489342">"الإعدادات السريعة"</item>
     <item msgid="5454862951059393431">"شاشة القفل"</item>
   </string-array>
+
+  <!-- Dual Audio Presets -->
+  <string-array name="dual_audio_preset_entries">
+    <item>"ستيريو متوازن (موصى به)"</item>
+    <item>"وضوح الحوار والأصوات"</item>
+    <item>"تعزيز قوي للأداء (ألعاب/أفلام)"</item>
+    <item>"تركيز البيس على السماعة السفلية"</item>
+    <item>"ستيريو هادئ ومحيطي"</item>
+    <item>"نمط مخصص (ضبط يدوي)"</item>
+  </string-array>
+
+  <!-- Dual Audio Hardware PA Gain -->
+  <string-array name="dual_audio_gain_entries">
+    <item>"افتراضي (0 ديسيبل)"</item>
+    <item>"+1 ديسيبل (خفيف جداً)"</item>
+    <item>"+2 ديسيبل (خفيف متزن)"</item>
+    <item>"+3 ديسيبل (موصى به)"</item>
+    <item>"+4 ديسيبل (واضح وقوي)"</item>
+    <item>"+5 ديسيبل (تعزيز مرتفع)"</item>
+    <item>"+6 ديسيبل (أقصى كسب مسموح)"</item>
+  </string-array>
+
+  <!-- Dual Audio Balance Ratios -->
+  <string-array name="dual_audio_balance_entries">
+    <item>"تركيز علوي (40:60 - تركيز على السماعة العلوية)"</item>
+    <item>"متوازن (50:50)"</item>
+    <item>"تركيز سفلي (70:30 - تركيز على السماعة السفلية)"</item>
+  </string-array>
 </resources>

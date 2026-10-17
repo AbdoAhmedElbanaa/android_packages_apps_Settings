@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (C) 2026 RisingOS Android Project
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:title="@string/bypass_charging_settings_title"
+    android:key="bypass_charging_settings_screen"
+    settings:keywords="@string/keywords_bypass_charging">
+
+    <!-- Main Toggle -->
+    <SwitchPreferenceCompat
+        android:key="bypass_charging"
+        android:title="@string/bypass_charging_title"
+        settings:controller="com.android.settings.deviceinfo.batteryinfo.BypassChargingPreferenceController"/>
+
+    <!-- Live Charging Status -->
+    <PreferenceCategory
+        android:key="bypass_live_status_category"
+        android:title="@string/bypass_charging_live_status">
+
+        <Preference
+            android:key="bypass_charging_status"
+            android:title="@string/battery_charging_status"
+            android:summary="@string/summary_placeholder"
+            settings:controller="com.android.settings.deviceinfo.batteryinfo.BatteryChargingStatusPreferenceController"
+            settings:enableCopying="true"/>
+
+        <Preference
+            android:key="bypass_charge_type"
+            android:title="@string/battery_charge_type"
+            android:summary="@string/summary_placeholder"
+            settings:controller="com.android.settings.deviceinfo.batteryinfo.BatteryChargingTypePreferenceController"
+            settings:enableCopying="true"/>
+
+        <Preference
+            android:key="bypass_voltage"
+            android:title="@string/battery_voltage"
+            android:summary="@string/summary_placeholder"
+            settings:controller="com.android.settings.deviceinfo.batteryinfo.BatteryVoltagePreferenceController"
+            settings:enableCopying="true"/>
+
+        <Preference
+            android:key="bypass_current"
+            android:title="@string/battery_current"
+            android:summary="@string/summary_placeholder"
+            settings:controller="com.android.settings.deviceinfo.batteryinfo.BatteryCurrentPreferenceController"
+            settings:enableCopying="true"/>
+
+        <Preference
+            android:key="bypass_temperature"
+            android:title="@string/battery_temperature"
+            android:summary="@string/summary_placeholder"
+            settings:controller="com.android.settings.deviceinfo.batteryinfo.BatteryTemperaturePreferenceController"
+            settings:enableCopying="true"/>
+
+    </PreferenceCategory>
+
+    <!-- Footer — Explanation -->
+    <com.android.settingslib.widget.FooterPreference
+        android:key="bypass_charging_footer"
+        android:title="@string/bypass_charging_footer"
+        settings:searchable="false"/>
+
+</PreferenceScreen>

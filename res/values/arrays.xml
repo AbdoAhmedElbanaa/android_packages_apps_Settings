@@ -1802,4 +1802,54 @@
         <item>Quick settings</item>
         <item>Lockscreen</item>
     </string-array>
+
+    <!-- Dual Audio Presets -->
+    <string-array name="dual_audio_preset_entries">
+        <item>Balanced Stereo (Recommended)</item>
+        <item>Vocal &amp; Dialog Clarity</item>
+        <item>Dynamic Boost (Gaming/Movies)</item>
+        <item>Bass &amp; Bottom Focus</item>
+        <item>Subtle Ambient Stereo</item>
+        <item>Custom Profile (Manual Tuning)</item>
+    </string-array>
+    <string-array name="dual_audio_preset_values" translatable="false">
+        <item>balanced</item>
+        <item>vocal</item>
+        <item>dynamic</item>
+        <item>bass</item>
+        <item>ambient</item>
+        <item>custom</item>
+    </string-array>
+
+    <!-- Dual Audio Hardware PA Gain -->
+    <string-array name="dual_audio_gain_entries">
+        <item>Default (0 dB)</item>
+        <item>+1 dB (Subtle)</item>
+        <item>+2 dB (Mild)</item>
+        <item>+3 dB (Recommended)</item>
+        <item>+4 dB (Clear &amp; Loud)</item>
+        <item>+5 dB (High Boost)</item>
+        <item>+6 dB (Maximum)</item>
+    </string-array>
+    <string-array name="dual_audio_gain_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+    </string-array>
+
+    <!-- Dual Audio Balance Ratios -->
+    <string-array name="dual_audio_balance_entries">
+        <item>Top-biased (40:60 - Top Focus)</item>
+        <item>Balanced (50:50)</item>
+        <item>Bottom-biased (70:30 - Bottom Focus)</item>
+    </string-array>
+    <string-array name="dual_audio_balance_values" translatable="false">
+        <item>top</item>
+        <item>balanced</item>
+        <item>bottom</item>
+    </string-array>
 </resources>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2024 The Android Open Source Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:key="dual_audio_settings_screen"
+    android:title="@string/dual_audio_title">
+
+    <com.android.settingslib.widget.MainSwitchPreference
+        android:key="dual_audio_master_switch"
+        android:title="@string/dual_audio_master_switch_title"
+        android:order="-100"
+        settings:controller="com.android.settings.sound.dualaudio.DualAudioMainSwitchPreferenceController" />
+
+    <PreferenceCategory
+        android:key="dual_audio_presets_category"
+        android:title="@string/dual_audio_preset_category"
+        android:order="-80">
+
+        <ListPreference
+            android:key="dual_audio_preset"
+            android:title="@string/dual_audio_preset_title"
+            android:dialogTitle="@string/dual_audio_preset_dialog_title"
+            android:entries="@array/dual_audio_preset_entries"
+            android:entryValues="@array/dual_audio_preset_values"
+            android:defaultValue="balanced"
+            android:summary="%s"
+            android:order="-79"
+            settings:controller="com.android.settings.sound.dualaudio.DualAudioPresetPreferenceController" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="dual_audio_tuning_category"
+        android:title="@string/dual_audio_tuning_category"
+        android:order="-60">
+
+        <ListPreference
+            android:key="dual_audio_earpiece_gain"
+            android:title="@string/dual_audio_earpiece_gain_title"
+            android:dialogTitle="@string/dual_audio_earpiece_gain_dialog_title"
+            android:entries="@array/dual_audio_gain_entries"
+            android:entryValues="@array/dual_audio_gain_values"
+            android:defaultValue="3"
+            android:summary="%s"
+            android:order="-59"
+            settings:controller="com.android.settings.sound.dualaudio.DualAudioGainPreferenceController" />
+
+        <ListPreference
+            android:key="dual_audio_speaker_balance"
+            android:title="@string/dual_audio_speaker_balance_title"
+            android:dialogTitle="@string/dual_audio_speaker_balance_dialog_title"
+            android:entries="@array/dual_audio_balance_entries"
+            android:entryValues="@array/dual_audio_balance_values"
+            android:defaultValue="balanced"
+            android:summary="%s"
+            android:order="-58"
+            settings:controller="com.android.settings.sound.dualaudio.DualAudioBalancePreferenceController" />
+    </PreferenceCategory>
+
+    <com.android.settingslib.widget.FooterPreference
+        android:key="dual_audio_info_footer"
+        android:title="@string/dual_audio_info_footer"
+        android:selectable="false"
+        android:order="100" />
+
+</PreferenceScreen>

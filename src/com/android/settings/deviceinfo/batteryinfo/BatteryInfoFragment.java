@@ -17,7 +17,10 @@
 package com.android.settings.deviceinfo.batteryinfo;
 
 import android.app.settings.SettingsEnums;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 
 import com.android.settings.R;
@@ -36,6 +39,16 @@ public class BatteryInfoFragment extends DashboardFragment {
     private static final String KEY_BATTERY_INFO_FOOTER = "battery_info_footer";
 
     private FooterPreference mFooterPreference;
+
+    /** Triggers real-time refresh of all preferences whenever battery state changes. */
+    private final BroadcastReceiver mBatteryReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (Intent.ACTION_BATTERY_CHANGED.equals(intent.getAction())) {
+                updatePreferenceStates();
+            }
+        }
+    };
 
     @Override
     public int getMetricsCategory() {
@@ -58,6 +71,19 @@ public class BatteryInfoFragment extends DashboardFragment {
         super.onActivityCreated(savedInstanceState);
         mFooterPreference.setVisible(
                 getContext().getResources().getBoolean(R.bool.config_show_battery_cycle_count));
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getContext().registerReceiver(mBatteryReceiver,
+                new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        getContext().unregisterReceiver(mBatteryReceiver);
     }
 
     @Override

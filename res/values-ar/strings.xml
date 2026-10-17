@@ -6235,4 +6235,99 @@
     <string name="permit_access_hid" msgid="870824396872060949">"‏السماح للتطبيق بالعثور على أجهزة الواجهة البشرية (HID)"</string>
     <string name="allow_access_hid_description" msgid="5950783046013896271">"‏في حال منح الإذن، قد تعيد التطبيقات الضارة برمجة أجهزة الواجهة البشرية (HID) لاختراق نظامك. على سبيل المثال، يمكن للتطبيقات محاكاة إدخالات لوحة المفاتيح أو الماوس للتحكّم في نظامك عندما لا يكون مفتوحًا. لذا يُرجى التأكّد من أنّ تلك التطبيقات موثوقة عند منحها إذن الوصول."</string>
     <string name="keywords_access_hid" msgid="682455265293135353">"جهاز واجهة بشرية، بشرية، وصول، جهاز"</string>
+    <!-- RisingOS - Battery Information screen -->
+    <string name="battery_realtime_category">"الحالة الآنية"</string>
+    <string name="battery_hardware_category">"معلومات العتاد"</string>
+    <string name="battery_charging_status">"حالة الشحن"</string>
+    <string name="battery_current">"التيار الكهربائي"</string>
+    <string name="battery_charge_counter">"الشحن المتبقي"</string>
+    <string name="battery_charge_type">"نوع الشحن"</string>
+
+    <!-- Battery Information screen - Charging status values -->
+    <string name="battery_status_charging">"يشحن"</string>
+    <string name="battery_status_discharging">"يُفرَّغ"</string>
+    <string name="battery_status_not_charging">"لا يشحن"</string>
+    <string name="battery_status_full">"مكتمل"</string>
+    <string name="battery_status_unknown">"غير معروف"</string>
+
+    <!-- Battery Information screen - Plugged source -->
+    <string name="battery_plugged_ac">"التيار المتردد"</string>
+    <string name="battery_plugged_usb">"USB"</string>
+    <string name="battery_plugged_wireless">"لاسلكي"</string>
+
+    <!-- Battery Information screen - Charging type values (Qualcomm SMB5) -->
+    <string name="battery_charge_type_none">"لا يشحن"</string>
+    <string name="battery_charge_type_sdp">"شحن قياسي (SDP)"</string>
+    <string name="battery_charge_type_cdp">"منفذ تيار المنبع (CDP)"</string>
+    <string name="battery_charge_type_dcp">"منفذ شحن مخصص (DCP)"</string>
+    <string name="battery_charge_type_float">"شاحن عائم"</string>
+    <string name="battery_charge_type_ocp">"شاحن غير متوافق"</string>
+    <string name="battery_charge_type_qc2">"الشحن السريع 2.0"</string>
+    <string name="battery_charge_type_qc3">"الشحن السريع 3.0"</string>
+    <string name="battery_charge_type_qc3p5">"الشحن السريع 3.5"</string>
+    <string name="battery_charge_type_pd">"توصيل طاقة USB (PD)"</string>
+
+    <!-- Battery Information screen - Generic not available -->
+    <string name="battery_info_not_available">"غير متوفر"</string>
+
+    <!-- Bypass charging -->
+    <string name="bypass_charging_title">"تفعيل الشحن الانتقالي"</string>
+    <string name="bypass_charging_summary_on">"نشط — يعمل الجهاز مباشرةً من المحوّل، البطارية في وضع الخمول"</string>
+    <string name="bypass_charging_summary_off">"معطّل — يشحن بشكل اعتيادي عبر البطارية"</string>
+    <string name="bypass_charging_summary_unplugged">"وصّل شاحناً لاستخدام الشحن الانتقالي"</string>
+    <string name="bypass_charging_unavailable">"غير مدعوم على هذا الجهاز"</string>
+    <string name="bypass_charging_status_direct">"طاقة مباشرة من الشاحن (الشحن الانتقالي نشط)"</string>
+
+    <!-- Bypass Charging Settings Page (standalone) -->
+    <string name="bypass_charging_settings_title">"الشحن الانتقالي (Bypass Charging)"</string>
+    <string name="bypass_charging_entry_summary_on">"مفعّل — البطارية في وضع الخمول، التيار من المحوّل مباشرة"</string>
+    <string name="bypass_charging_footer">"يُوجِّه الشحن الانتقالي الطاقة مباشرةً من المحوّل إلى مكونات الجهاز مع إبقاء البطارية عند مستواها الحالي دون شحن أو تفريغ. يُقلل هذا من الحرارة وتآكل البطارية خلال الاستخدام المكثف (مثل الألعاب) وهي متصلة بالكهرباء. يتطلب شاحناً متوافقاً مع USB Power Delivery (PD) أو Quick Charge. أوقف تشغيل هذا الوضع قبل فصل الشاحن لتفادي الإيقاف المفاجئ."</string>
+    <string name="keywords_bypass_charging">"الشحن الانتقالي، تعليق الشحن، خمول البطارية، bypass charging"</string>
+
+    <!-- Dual Audio -->
+    <string name="dual_audio_title">"الصوت المزدوج"</string>
+    <string name="dual_audio_summary">"استخدام سماعة المكالمات العلوية كسماعة ثانية للحصول على صوت ستيريو"</string>
+    <string name="dual_audio_summary_on">"مفعّل \u2022 %1$s"</string>
+    <string name="dual_audio_summary_off">"غير مفعّل"</string>
+    <string name="dual_audio_master_switch_title">"استخدام الصوت المزدوج"</string>
+    <string name="dual_audio_master_switch_summary">"إخراج وسائط الصوت عبر السماعة العلوية والسماعة السفلية معاً"</string>
+    <string name="dual_audio_preset_category">"الأنماط الصوتية الجاهزة"</string>
+    <string name="dual_audio_preset_title">"نمط الصوت المسبق"</string>
+    <string name="dual_audio_preset_dialog_title">"اختيار نمط الصوت المسبق"</string>
+    <string name="dual_audio_tuning_category">"التوازن ومستويات التعزيز (Gain)"</string>
+    <string name="dual_audio_earpiece_gain_title">"كسب السماعة العلوية العتادي"</string>
+    <string name="dual_audio_earpiece_gain_dialog_title">"اختيار مستوى الكسب العتادي"</string>
+    <string name="dual_audio_speaker_balance_title">"توزيع توازن السماعات"</string>
+    <string name="dual_audio_speaker_balance_dialog_title">"اختيار نسبة التوازن"</string>
+    <string name="dual_audio_info_footer">"تستغل ميزة الصوت المزدوج سماعة الأذن العلوية بجانب مكبر الصوت السفلي لخلق مسرح صوتي استريو واسع وغامر. يتم إيقاف التوجيه مؤقتاً وبشكل تلقائي أثناء المكالمات الهاتفية والصوتية لحماية حاسة السمع ومنع حدوث أي صدى صوتي عبر الميكروفون. تُطبّق التغييرات لحظياً بدون الحاجة لإعادة التشغيل."</string>
+    <string name="keywords_dual_audio">"صوت مزدوج، سماعات ستيريو، سماعة مزدوجة، تعزيز الصوت، موازنة الصوت، dual audio"</string>
+
+    <!-- AI Voice Clarity (Clarifae) -->
+    <string name="clarifae_title">"نقاء الصوت بالذكاء الاصطناعي"</string>
+    <string name="clarifae_summary">"عزل الضوضاء وتحسين نقاء الصوت بالذكاء الاصطناعي في الوقت الفعلي"</string>
+    <string name="clarifae_summary_on">"مفعّل \u2022 %1$s"</string>
+    <string name="clarifae_summary_off">"غير مفعّل"</string>
+    <string name="clarifae_master_switch_title">"استخدام نقاء الصوت بالذكاء الاصطناعي"</string>
+    <string name="clarifae_master_switch_summary">"تنقية الصوت وعزل الضوضاء المحيطة باستخدام شبكات عصبية فورية"</string>
+    <string name="clarifae_mic_category">"تنقية الميكروفون (المدخلات)"</string>
+    <string name="clarifae_in_enabled_title">"تنقية صوت الميكروفون"</string>
+    <string name="clarifae_in_enabled_summary">"تنقية صوتك الخارج في المكالمات وتطبيقات التواصل وتسجيل الصوت"</string>
+    <string name="clarifae_strength_title">"قوة عزل الميكروفون"</string>
+    <string name="clarifae_strength_summary">"شدة عزل الضوضاء بالذكاء الاصطناعي للميكروفون (%1$d%%)"</string>
+    <string name="clarifae_playback_category">"تنقية الصوت المسموع (المخرجات)"</string>
+    <string name="clarifae_out_enabled_title">"تنقية الصوت المسموع"</string>
+    <string name="clarifae_out_enabled_summary">"تنقية صوت الطرف الآخر المسموع عبر سماعة الأذن أو مكبر الصوت"</string>
+    <string name="clarifae_out_strength_title">"قوة عزل الصوت المسموع"</string>
+    <string name="clarifae_out_strength_summary">"شدة عزل الضوضاء بالذكاء الاصطناعي للصوت المسموع (%1$d%%)"</string>
+    <string name="clarifae_advanced_category">"الضبط الصوتي المتقدم"</string>
+    <string name="clarifae_atten_db_title">"الحد الأقصى لكبح الضوضاء"</string>
+    <string name="clarifae_atten_db_summary">"تحديد سقف خفض الضوضاء لحماية النبرة الطبيعية للصوت (%1$d dB)"</string>
+    <string name="clarifae_vad_title">"حساسية كاشف النشاط الصوتي (بوابة الصمت)"</string>
+    <string name="clarifae_vad_summary">"حساسية كشف الصوت البشري لكتم الضوضاء في فترات الصمت بين الكلمات (%1$d%%)"</string>
+    <string name="clarifae_highpass_title">"مرشح الترددات المنخفضة (High-pass)"</string>
+    <string name="clarifae_highpass_summary">"قطع الترددات المنخفضة تحت 80Hz لعزل صوت الرياح ودمدمة الهواء"</string>
+    <string name="clarifae_autogain_title">"التعزيز الصوتي التلقائي"</string>
+    <string name="clarifae_autogain_summary">"رفع ذكي لمستوى صوت المتحدثين البعيدين عن الهاتف"</string>
+    <string name="clarifae_info_footer">"تستخدم ميزة نقاء الصوت شبكة RNNoise العصبية المدعومة بتسريع ARM NEON العتادي على معالج Snapdragon 720G لعزل الضوضاء في الوقت الفعلي بتأخير أقل من 12 ملي ثانية واستهلاك معالج لا يتعدى 2%. تُطبّق التغييرات لحظياً دون الحاجة لإعادة التشغيل."</string>
+    <string name="keywords_clarifae">"عزل الضوضاء، نقاء الصوت، ميكروفون، ذكاء اصطناعي، صوت نقي، إلغاء الضجيج، clarifae, denoise"</string>
 </resources>

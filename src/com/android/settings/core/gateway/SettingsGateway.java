@@ -118,6 +118,7 @@ import com.android.settings.display.refreshrate.ScreenRefreshRateFragment;
 import com.android.settings.dream.DreamSettings;
 import com.android.settings.enterprise.EnterprisePrivacySettings;
 import com.android.settings.fuelgauge.AdvancedPowerUsageDetail;
+import com.android.settings.fuelgauge.BypassChargingSettings;
 import com.android.settings.fuelgauge.batterysaver.BatterySaverScheduleSettings;
 import com.android.settings.fuelgauge.batterysaver.BatterySaverSettings;
 import com.android.settings.fuelgauge.batteryusage.PowerUsageAdvanced;
@@ -207,6 +208,8 @@ import com.android.settings.security.SecurityAdvancedSettings;
 import com.android.settings.security.SecuritySettings;
 import com.android.settings.shortcut.CreateShortcut;
 import com.android.settings.sound.MediaControlsSettings;
+import com.android.settings.sound.clarifae.ClarifaeSettings;
+import com.android.settings.sound.dualaudio.DualAudioSettings;
 import com.android.settings.supervision.SupervisionDashboardFragment;
 import com.android.settings.support.SupportDashboardActivity;
 import com.android.settings.system.ResetDashboardFragment;
@@ -340,6 +343,7 @@ public class SettingsGateway {
             ChooseLockPattern.ChooseLockPatternFragment.class.getName(),
             AppInfoDashboardFragment.class.getName(),
             BatterySaverSettings.class.getName(),
+            BypassChargingSettings.class.getName(),
             AppNotificationSettings.class.getName(),
             PoliteNotificationsPreferenceFragment.class.getName(),
             NotificationAssistantPicker.class.getName(),
@@ -400,6 +404,8 @@ public class SettingsGateway {
             InteractAcrossProfilesSettings.class.getName(),
             InteractAcrossProfilesDetails.class.getName(),
             MediaControlsSettings.class.getName(),
+            DualAudioSettings.class.getName(),
+            ClarifaeSettings.class.getName(),
             NetworkProviderSettings.class.getName(),
             NetworkSelectSettings.class.getName(),
             AlarmsAndRemindersDetails.class.getName(),
@@ -460,7 +466,8 @@ public class SettingsGateway {
             PrivateDnsSettings.class.getName(),
             SmartPixels.class.getName(),
             RunningServices.class.getName(),
-            ScreenRefreshRateFragment.class.getName()
+            ScreenRefreshRateFragment.class.getName(),
+            com.rising.settings.fragments.HideDeveloperStatus.class.getName()
     };
 
     public static final String[] SETTINGS_FOR_RESTRICTED = {
