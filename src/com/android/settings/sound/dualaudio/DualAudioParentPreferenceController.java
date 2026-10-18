@@ -48,4 +48,20 @@ public class DualAudioParentPreferenceController extends BasePreferenceControlle
             preference.setSummary(getSummary());
         }
     }
+
+    @Override
+    public boolean handlePreferenceTreeClick(Preference preference) {
+        if (getPreferenceKey().equals(preference.getKey())) {
+            try {
+                android.content.Intent intent = new android.content.Intent(android.content.Intent.ACTION_MAIN);
+                intent.setClassName("org.rising.dualaudio", "org.rising.dualaudio.MainActivity");
+                intent.addFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK);
+                mContext.startActivity(intent);
+                return true;
+            } catch (Exception e) {
+                Log.e(TAG, "Could not start DualAudio app: " + e.getMessage(), e);
+            }
+        }
+        return super.handlePreferenceTreeClick(preference);
+    }
 }

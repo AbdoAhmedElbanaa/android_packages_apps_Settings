@@ -100,6 +100,10 @@ public class DualAudioManager {
                 }
                 am.setParameters("restart_audio=1");
             }
+
+            try {
+                SystemProperties.set("sys.dualaudio.apply", "1");
+            } catch (Exception ignored) {}
         } catch (Exception e) {
             Log.e(TAG, "Error toggling dual audio: " + e.getMessage(), e);
         }
@@ -234,6 +238,10 @@ public class DualAudioManager {
                 am.setParameters("dual_audio_balance=" + balance);
                 am.setParameters("restart_audio=1");
             }
+
+            try {
+                SystemProperties.set("sys.dualaudio.apply", "1");
+            } catch (Exception ignored) {}
             return true;
         } catch (Exception e) {
             Log.e(TAG, "Error applying dual audio settings: " + e.getMessage(), e);

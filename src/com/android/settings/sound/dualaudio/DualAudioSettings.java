@@ -1,37 +1,37 @@
 /*
- * Copyright (C) 2024 The Android Open Source Project
+ * Copyright (C) 2026 The LineageOS Project
  * SPDX-License-Identifier: Apache-2.0
  */
 
 package com.android.settings.sound.dualaudio;
 
-import android.app.settings.SettingsEnums;
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
 
-import com.android.settings.R;
-import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settingslib.search.SearchIndexable;
+import androidx.fragment.app.Fragment;
 
-@SearchIndexable
-public class DualAudioSettings extends DashboardFragment {
-
+/**
+ * Legacy stub that redirects to the standalone DualAudio application.
+ */
+public class DualAudioSettings extends Fragment {
     private static final String TAG = "DualAudioSettings";
 
     @Override
-    protected int getPreferenceScreenResId() {
-        return R.xml.dual_audio_settings;
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Activity activity = getActivity();
+        if (activity != null) {
+            try {
+                Intent intent = new Intent(Intent.ACTION_MAIN);
+                intent.setClassName("org.rising.dualaudio", "org.rising.dualaudio.MainActivity");
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            } catch (Exception e) {
+                Log.e(TAG, "Error redirecting to DualAudio app: " + e.getMessage(), e);
+            }
+            activity.finish();
+        }
     }
-
-    @Override
-    protected String getLogTag() {
-        return TAG;
-    }
-
-    @Override
-    public int getMetricsCategory() {
-        return SettingsEnums.PAGE_UNKNOWN;
-    }
-
-    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.dual_audio_settings);
 }

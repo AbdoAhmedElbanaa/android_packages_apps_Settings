@@ -6,6 +6,7 @@
 package com.android.settings.sound.clarifae;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 
 import androidx.preference.Preference;
@@ -48,5 +49,21 @@ public class ClarifaeParentPreferenceController extends BasePreferenceController
         if (preference != null) {
             preference.setSummary(getSummary());
         }
+    }
+
+    @Override
+    public boolean handlePreferenceTreeClick(Preference preference) {
+        if (getPreferenceKey().equals(preference.getKey())) {
+            try {
+                Intent intent = new Intent(Intent.ACTION_MAIN);
+                intent.setClassName("org.rising.clarifae", "org.rising.clarifae.MainActivity");
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                mContext.startActivity(intent);
+                return true;
+            } catch (Exception e) {
+                Log.e(TAG, "Could not start Clarifae app: " + e.getMessage(), e);
+            }
+        }
+        return super.handlePreferenceTreeClick(preference);
     }
 }

@@ -79,9 +79,49 @@ public class ClarifaeManager {
             val = SystemProperties.get(PREFIX_LEGACY + key, "");
         }
         if (val.isEmpty()) {
+            val = readConfigKey(key);
+        }
+        if (val.isEmpty()) {
             return def;
         }
         return "1".equals(val) || "true".equalsIgnoreCase(val) || "on".equalsIgnoreCase(val);
+    }
+
+    private static String readConfigKey(String key) {
+        String[] paths = {"/data/misc/clarifae/config.conf", "/data/vendor/clarifae/config.conf", "/data/adb/clarifae/config.conf", "/vendor/etc/clarifae/config.conf"};
+        for (String p : paths) {
+            File f = new File(p);
+            if (f.exists() && f.canRead()) {
+                try (java.io.BufferedReader br = new java.io.BufferedReader(new java.io.FileReader(f))) {
+                    String line;
+                    while ((line = br.readLine()) != null) {
+                        line = line.trim();
+                        if (line.startsWith(key + "=")) {
+                            return line.substring(key.length() + 1).trim();
+                        }
+                    }
+                } catch (Exception ignored) {}
+            }
+        // If no config file found, create default one
+        ensureDefaultConfigFile();
+        return "";
+    }
+
+    private static void ensureDefaultConfigFile() {
+        try {
+            File f = new File("/data/misc/clarifae/config.conf");
+            if (!f.exists()) {
+                File dir = f.getParentFile();
+                if (dir != null && !dir.exists()) {
+                    dir.mkdirs();
+                }
+                try (java.io.FileWriter fw = new java.io.FileWriter(f)) {
+                    fw.write("enabled=1\nin_enabled=1\nout_enabled=0\nmode=1\nstrength=70\nout_strength=60\natten_db=24\nvad=50\ntargets=mic,voice_comm,camcorder,voice_rec\nout_targets=music,voice_call,system\nhighpass=1\nautogain=0\nloglevel=1\n");
+                }
+                f.setReadable(true, false);
+                f.setWritable(true, false);
+            }
+        } catch (Exception ignored) {}
     }
 
     private static int getPropInt(String key, int def) {

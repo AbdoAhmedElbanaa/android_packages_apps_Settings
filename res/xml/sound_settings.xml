@@ -212,10 +212,14 @@
             android:title="@string/dual_audio_title"
             android:summary="@string/dual_audio_summary"
             android:icon="@drawable/ic_dual_audio"
-            android:fragment="com.android.settings.sound.dualaudio.DualAudioSettings"
             android:order="-108"
             settings:controller="com.android.settings.sound.dualaudio.DualAudioParentPreferenceController"
-            settings:keywords="@string/keywords_dual_audio" />
+            settings:keywords="@string/keywords_dual_audio">
+            <intent
+                android:action="android.intent.action.MAIN"
+                android:targetPackage="org.rising.dualaudio"
+                android:targetClass="org.rising.dualaudio.MainActivity" />
+        </Preference>
 
         <!-- AI Voice Clarity (Clarifae) -->
         <Preference
@@ -223,10 +227,14 @@
             android:title="@string/clarifae_title"
             android:summary="@string/clarifae_summary"
             android:icon="@drawable/ic_clarifae"
-            android:fragment="com.android.settings.sound.clarifae.ClarifaeSettings"
             android:order="-107"
             settings:controller="com.android.settings.sound.clarifae.ClarifaeParentPreferenceController"
-            settings:keywords="@string/keywords_clarifae" />
+            settings:keywords="@string/keywords_clarifae">
+            <intent
+                android:action="android.intent.action.MAIN"
+                android:targetPackage="org.rising.clarifae"
+                android:targetClass="org.rising.clarifae.MainActivity" />
+        </Preference>
 
         <!-- Spatial audio -->
         <Preference
