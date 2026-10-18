@@ -55,4 +55,13 @@
     <string name="touchscreen_hovering_summary">يسمح لك بالمرور فوق الشاشة مثل الماوس في مستعرضات الويب، أو سطح المكتب عن بُعد، إلخ</string>
     <string name="wake_when_plugged_or_unplugged_title">الإيقاظ عند التوصيل</string>
     <string name="wake_when_plugged_or_unplugged_summary">تشغيل الشاشة عند الاتصال أو قطع الاتصال بمصدر الطاقة</string>
+
+    <!-- Biometric Scan Mode (Face & Eye unlock) -->
+    <string name="security_settings_biometric_scan_mode_title">نمط المسح الحيوي لفتح القفل</string>
+    <string name="security_settings_biometric_scan_mode_summary">اختر بين التعرف على الوجه الكامل، أو بصمة العين والقزحية، أو الوضع المزدوج فائق الأمان</string>
+    <string name="security_settings_biometric_scan_mode_full_face">بصمة الوجه الكاملة</string>
+    <string name="security_settings_biometric_scan_mode_eye_only">بصمة العين والقزحية فقط</string>
+    <string name="security_settings_biometric_scan_mode_dual">الوضع المزدوج (الوجه + حيوية العين)</string>
+    <string name="security_settings_face_remove_dialog_title">حذف بصمة الوجه؟</string>
+    <string name="security_settings_face_remove_dialog_message">هل أنت متأكد من رغبتك في حذف قالب بصمة الوجه هذا؟</string>
 </resources>

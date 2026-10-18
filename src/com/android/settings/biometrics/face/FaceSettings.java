@@ -35,15 +35,22 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.ResourceId;
+import android.app.AlertDialog;
+import android.hardware.face.Face;
 import android.hardware.face.FaceManager;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.provider.Settings;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.Toast;
 
+import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
+
+import java.util.Collections;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
@@ -121,6 +128,8 @@ public class FaceSettings extends DashboardFragment {
     private Preference mFaceRemoveButton;
     private Preference mFaceEnrollButton;
     private FaceFeatureProvider mFaceFeatureProvider;
+    private FaceUpdater mFaceUpdater;
+    private ListPreference mBiometricScanModePreference;
 
     private boolean mConfirmingPassword;
     private boolean mBiometricsAuthenticationRequested;
@@ -277,6 +286,27 @@ public class FaceSettings extends DashboardFragment {
             mFaceEnrollButton.setIcon(R.drawable.ic_add_24dp);
             mFaceEnrollButton.setOnPreferenceClickListener(
                     use(FaceSettingsEnrollButtonPreferenceController.class));
+        }
+
+        mFaceUpdater = new FaceUpdater(getActivity(), mFaceManager);
+
+        mBiometricScanModePreference = findPreference("security_settings_biometric_scan_mode");
+        if (mBiometricScanModePreference != null) {
+            int currentMode = Settings.Secure.getIntForUser(
+                    getContentResolver(),
+                    "face_unlock_biometric_mode",
+                    0,
+                    mUserId);
+            mBiometricScanModePreference.setValue(String.valueOf(currentMode));
+            mBiometricScanModePreference.setOnPreferenceChangeListener((preference, newValue) -> {
+                int mode = Integer.parseInt((String) newValue);
+                Settings.Secure.putIntForUser(
+                        getContentResolver(),
+                        "face_unlock_biometric_mode",
+                        mode,
+                        mUserId);
+                return true;
+            });
         }
 
         final boolean hasEnrolled = mFaceManager.hasEnrolledTemplates(mUserId);
@@ -540,12 +570,76 @@ public class FaceSettings extends DashboardFragment {
     private void updateFaceAddAndRemovePreference(boolean hasEnrolled) {
         if (mFaceFeaturesEnabled) {
             mFaceEnrolledCategory.setVisible(true);
-            mFaceRemoveButton.setVisible(hasEnrolled);
-            mFaceEnrollButton.setVisible(!hasEnrolled);
+            mFaceEnrolledCategory.removeAll();
+
+            final List<Face> enrolledFaces = mFaceManager != null
+                    ? mFaceManager.getEnrolledFaces(mUserId)
+                    : Collections.emptyList();
+            final int maxEnrollments = mFaceFeatureProvider != null
+                    ? mFaceFeatureProvider.getMaxEnrollableCount(getContext())
+                    : 5;
+
+            for (Face face : enrolledFaces) {
+                FacePreference pref = new FacePreference(getContext(), preference -> {
+                    showConfirmRemoveFaceDialog(preference.getFace());
+                });
+                pref.setKey("security_settings_face_" + face.getBiometricId());
+                CharSequence name = face.getName();
+                pref.setTitle(name != null && !name.toString().isEmpty()
+                        ? name
+                        : getString(R.string.security_settings_face_preference_title_new));
+                pref.setIcon(R.drawable.ic_face);
+                pref.setFace(face);
+                pref.setPersistent(false);
+                mFaceEnrolledCategory.addPreference(pref);
+            }
+
+            if (enrolledFaces.size() < maxEnrollments) {
+                if (mFaceEnrollButton == null) {
+                    mFaceEnrollButton = new Preference(getContext());
+                    mFaceEnrollButton.setKey(PREF_KEY_FACE_ENROLL);
+                    mFaceEnrollButton.setTitle(R.string.security_settings_face_add);
+                    mFaceEnrollButton.setIcon(R.drawable.ic_add_24dp);
+                    mFaceEnrollButton.setOnPreferenceClickListener(
+                            use(FaceSettingsEnrollButtonPreferenceController.class));
+                }
+                mFaceEnrolledCategory.addPreference(mFaceEnrollButton);
+                mFaceEnrollButton.setVisible(true);
+            }
         } else {
             mEnrollButton.setVisible(!hasEnrolled);
             mRemoveButton.setVisible(hasEnrolled);
         }
+    }
+
+    private void showConfirmRemoveFaceDialog(Face face) {
+        if (face == null || getActivity() == null) {
+            return;
+        }
+        new AlertDialog.Builder(getActivity())
+                .setTitle(R.string.security_settings_face_remove_dialog_title)
+                .setMessage(R.string.security_settings_face_remove_dialog_message)
+                .setPositiveButton(R.string.delete, (dialog, which) -> {
+                    mFaceUpdater.remove(face, mUserId, new FaceManager.RemovalCallback() {
+                        @Override
+                        public void onRemovalError(Face fp, int errMsgId, CharSequence errString) {
+                            Toast.makeText(getContext(), errString, Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onRemovalSucceeded(Face fp, int remaining) {
+                            final boolean hasFaces = mFaceManager != null && mFaceManager.hasEnrolledTemplates(mUserId);
+                            updateFaceAddAndRemovePreference(hasFaces);
+                            if (!hasFaces) {
+                                for (Preference preference : mTogglePreferences) {
+                                    preference.setEnabled(false);
+                                }
+                            }
+                        }
+                    });
+                })
+                .setNegativeButton(R.string.cancel, null)
+                .show();
     }
 
     private boolean isDisabledByAdmin() {

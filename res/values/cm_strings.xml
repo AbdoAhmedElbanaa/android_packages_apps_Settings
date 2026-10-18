@@ -209,4 +209,12 @@
     <string name="bluetooth_details_audio_codec_title">Audio codec</string>
     <!-- Summary shown when the audio codec of a paired device cannot be read or chosen. [CHAR LIMIT=40] -->
     <string name="bluetooth_details_audio_codec_unavailable">Not available</string>
+    <!-- Biometric Scan Mode (Face & Eye unlock) -->
+    <string name="security_settings_biometric_scan_mode_title">Biometric scan mode</string>
+    <string name="security_settings_biometric_scan_mode_summary">Choose between full face recognition, eye and iris recognition, or dual security verification</string>
+    <string name="security_settings_biometric_scan_mode_full_face">Full Face Recognition</string>
+    <string name="security_settings_biometric_scan_mode_eye_only">Eye &amp; Iris Recognition Only</string>
+    <string name="security_settings_biometric_scan_mode_dual">Dual Security (Face + Eye Liveness)</string>
+    <string name="security_settings_face_remove_dialog_title">Delete face model?</string>
+    <string name="security_settings_face_remove_dialog_message">Are you sure you want to remove this face model?</string>
 </resources>

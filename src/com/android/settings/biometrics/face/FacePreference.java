@@ -27,10 +27,24 @@ import androidx.preference.PreferenceViewHolder;
 import com.android.settings.R;
 import com.android.settingslib.widget.TwoTargetPreference;
 
+import android.hardware.face.Face;
+
 public class FacePreference extends TwoTargetPreference {
+
+    public interface OnDeleteClickListener {
+        void onDeleteClick(FacePreference preference);
+    }
+
+    private Face mFace;
+    private OnDeleteClickListener mDeleteClickListener;
 
     public FacePreference(@NonNull Context context) {
         super(context);
+    }
+
+    public FacePreference(@NonNull Context context, OnDeleteClickListener deleteClickListener) {
+        super(context);
+        mDeleteClickListener = deleteClickListener;
     }
 
     public FacePreference(@NonNull Context context, @Nullable AttributeSet attrs) {
@@ -45,6 +59,18 @@ public class FacePreference extends TwoTargetPreference {
     public FacePreference(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr,
             int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
+    }
+
+    public void setFace(Face face) {
+        mFace = face;
+    }
+
+    public Face getFace() {
+        return mFace;
+    }
+
+    public void setOnDeleteClickListener(OnDeleteClickListener listener) {
+        mDeleteClickListener = listener;
     }
 
     @Override
@@ -65,6 +91,11 @@ public class FacePreference extends TwoTargetPreference {
         if (deleteIcon != null) {
             // prevent overlapped ripple effect when clicking
             deleteIcon.setBackground(null);
+            deleteIcon.setOnClickListener(v -> {
+                if (mDeleteClickListener != null) {
+                    mDeleteClickListener.onDeleteClick(this);
+                }
+            });
         }
     }
 }
