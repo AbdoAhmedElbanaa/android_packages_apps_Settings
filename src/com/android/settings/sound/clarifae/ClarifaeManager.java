@@ -102,6 +102,7 @@ public class ClarifaeManager {
                     }
                 } catch (Exception ignored) {}
             }
+        }
         // If no config file found, create default one
         ensureDefaultConfigFile();
         return "";

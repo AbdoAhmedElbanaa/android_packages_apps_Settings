@@ -560,4 +560,25 @@
     <item>"متوازن (50:50)"</item>
     <item>"تركيز سفلي (70:30 - تركيز على السماعة السفلية)"</item>
   </string-array>
+
+  <!-- Camera Flash Notification Blink Count Entries -->
+  <string-array name="camera_flash_notification_repeat_entries">
+    <item>"نبضة واحدة"</item>
+    <item>"نبضتان (الافتراضي)"</item>
+    <item>"3 نبضات"</item>
+    <item>"4 نبضات"</item>
+    <item>"5 نبضات"</item>
+    <item>"10 نبضات"</item>
+    <item>"مخصص…"</item>
+  </string-array>
+
+  <!-- Camera Flash Notification Pulse Rate Entries -->
+  <string-array name="camera_flash_notification_rate_entries">
+    <item>"1 نبضة/ثانية (بطيء - 500ms)"</item>
+    <item>"2 نبضة/ثانية (عادي - 250ms)"</item>
+    <item>"3 نبضات/ثانية (سريع - 165ms)"</item>
+    <item>"4 نبضات/ثانية (سريع جداً - 125ms)"</item>
+    <item>"5 نبضات/ثانية (وميض خاطف - 100ms)"</item>
+    <item>"مخصص…"</item>
+  </string-array>
 </resources>

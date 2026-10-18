@@ -29,6 +29,7 @@ import com.android.settings.accessibility.AccessibilityDetailsSettingsFragment;
 import com.android.settings.accessibility.AccessibilityHearingAidsFragment;
 import com.android.settings.accessibility.AccessibilitySettings;
 import com.android.settings.accessibility.AccessibilitySettingsForSetupWizard;
+import com.android.settings.accessibility.CameraFlashNotificationCustomSettingsFragment;
 import com.android.settings.accessibility.CaptioningPropertiesFragment;
 import com.android.settings.accessibility.ColorAndMotionFragment;
 import com.android.settings.accessibility.FlashNotificationsPreferenceFragment;
@@ -441,6 +442,7 @@ public class SettingsGateway {
             AppLockSubSettingsFragment.class.getName(),
             MagnificationPreferenceFragment.class.getName(),
             FlashNotificationsPreferenceFragment.class.getName(),
+            CameraFlashNotificationCustomSettingsFragment.class.getName(),
             BundlePreferenceFragment.class.getName(),
             SystemLocalePickerFragment.class.getName(),
             AppLocalePickerFragment.class.getName(),

@@ -1852,4 +1852,42 @@
         <item>balanced</item>
         <item>bottom</item>
     </string-array>
+
+    <!-- Camera Flash Notification Blink Count Entries -->
+    <string-array name="camera_flash_notification_repeat_entries">
+        <item>1 blink</item>
+        <item>2 blinks (Default)</item>
+        <item>3 blinks</item>
+        <item>4 blinks</item>
+        <item>5 blinks</item>
+        <item>10 blinks</item>
+        <item>Custom...</item>
+    </string-array>
+    <string-array name="camera_flash_notification_repeat_values" translatable="false">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>10</item>
+        <item>-1</item>
+    </string-array>
+
+    <!-- Camera Flash Notification Pulse Rate Entries -->
+    <string-array name="camera_flash_notification_rate_entries">
+        <item>1 pulse/sec (Slow - 500ms)</item>
+        <item>2 pulses/sec (Normal - 250ms)</item>
+        <item>3 pulses/sec (Fast - 165ms)</item>
+        <item>4 pulses/sec (Very Fast - 125ms)</item>
+        <item>5 pulses/sec (Strobe - 100ms)</item>
+        <item>Custom...</item>
+    </string-array>
+    <string-array name="camera_flash_notification_rate_values" translatable="false">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>-1</item>
+    </string-array>
 </resources>

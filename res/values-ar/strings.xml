@@ -5858,6 +5858,30 @@
     <string name="flash_notifications_keywords" msgid="2458759275318514836">"فلاش، ضوء، ضعيف السمع، فقدان السمع"</string>
     <string name="flash_notifications_preview" msgid="5320176885050440874">"معاينة"</string>
     <string name="camera_flash_notification_title" msgid="2475084876382922732">"وميض فلاش الكاميرا"</string>
+    <string name="camera_flash_notification_summary">"%1$d ومضات، %2$d هرتز"</string>
+    <string name="camera_flash_notification_pattern_category">"نمط وتوقيت الوميض"</string>
+    <string name="camera_flash_notification_repeat_title">"عدد مرات الوميض"</string>
+    <string name="camera_flash_notification_repeat_summary">"عدد مرات وميض الفلاش عند وصول كل إشعار"</string>
+    <string name="camera_flash_notification_rate_title">"معدل نبضات الوميض"</string>
+    <string name="camera_flash_notification_rate_summary">"تردد وسرعة النبضات في الثانية الواحدة"</string>
+    <string name="camera_flash_notification_intensity_category">"شدة إضاءة الفلاش"</string>
+    <string name="camera_flash_notification_strength_title">"قوة سطوع الفلاش"</string>
+    <string name="camera_flash_notification_strength_summary">"التحكم في مستوى سطوع مصباح الفلاش"</string>
+    <string name="camera_flash_notification_fixed_strength_summary">"يعمل هذا الجهاز بأقصى شدة سطوع قياسية للمصباح"</string>
+    <string name="camera_flash_notification_preview_category">"المعاينة والإجراءات"</string>
+    <string name="camera_flash_notification_preview_btn">"معاينة وميض الفلاش"</string>
+    <string name="camera_flash_notification_preview_btn_summary">"تجربة واختبار الفلاش بالإعدادات المحددة حالياً"</string>
+    <string name="camera_flash_notification_reset_btn">"استعادة الإعدادات الافتراضية"</string>
+    <string name="camera_flash_notification_reset_btn_summary">"إعادة ضبط نمط وشدة الوميض إلى الإعداد القياسي"</string>
+    <string name="camera_flash_notification_custom_dialog_title">"قيمة مخصصة"</string>
+    <string name="camera_flash_notification_custom_repeat_title">"عدد ومضات مخصص"</string>
+    <string name="camera_flash_notification_custom_repeat_hint">"أدخل عدد النبضات (1 - 20)"</string>
+    <string name="camera_flash_notification_custom_rate_title">"تردد وميض مخصص"</string>
+    <string name="camera_flash_notification_custom_rate_hint">"أدخل التردد بالهرتز (1 - 10 هرتز)"</string>
+    <string name="camera_flash_notification_save">"حفظ"</string>
+    <string name="camera_flash_notification_cancel">"إلغاء"</string>
+    <string name="camera_flash_notification_custom_option">"مخصص…"</string>
+    <string name="camera_flash_notification_reset_toast">"تمت استعادة إعدادات الفلاش الافتراضية"</string>
     <string name="screen_flash_notification_title" msgid="3773100725793316708">"وميض الشاشة"</string>
     <string name="screen_flash_notification_color_title" msgid="7213407653340970790">"لون وميض الشاشة"</string>
     <string name="screen_flash_color_blue" msgid="3585766657607931371">"أزرق"</string>
