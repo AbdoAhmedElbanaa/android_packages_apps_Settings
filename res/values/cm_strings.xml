@@ -217,4 +217,27 @@
     <string name="security_settings_biometric_scan_mode_dual">Dual Security (Face + Eye Liveness)</string>
     <string name="security_settings_face_remove_dialog_title">Delete face model?</string>
     <string name="security_settings_face_remove_dialog_message">Are you sure you want to remove this face model?</string>
+
+    <!-- Eye Unlock (بصمة العين) -->
+    <string name="security_settings_eye_preference_title">Eye Unlock</string>
+    <string name="security_settings_eye_settings_intro">Use your eye and iris biometric print to securely unlock your device and verify actions.</string>
+    <string name="security_settings_eye_category_enrolled_title">Enrolled Eye Prints</string>
+    <string name="security_settings_eye_add_title">Add eye print</string>
+    <string name="security_settings_eye_category_manage_title">Eye Unlock Options</string>
+    <string name="security_settings_eye_keyguard_title">Unlocking your phone</string>
+    <string name="security_settings_eye_keyguard_summary">Use your eye print to unlock your device</string>
+    <string name="security_settings_eye_require_gaze_title">Require eye gaze</string>
+    <string name="security_settings_eye_require_gaze_summary">To unlock your phone, your eyes must be open and looking directly at the screen</string>
+    <string name="security_settings_eye_remove_dialog_title">Delete eye print?</string>
+    <string name="security_settings_eye_remove_dialog_message">Are you sure you want to remove this eye print?</string>
+    <string name="security_settings_eye_preference_summary_none">Not set up</string>
+    <string name="security_settings_eye_preference_summary_single">1 eye print enrolled</string>
+    <string name="security_settings_eye_preference_summary_multiple">%1$d eye prints enrolled</string>
+    <string name="keywords_eye_settings">eye, iris, unlock, biometrics, security</string>
+    <string name="eye_enroll_title">Register Eye Print</string>
+    <string name="eye_enroll_summary">Hold your device at eye level and look straight at the front camera.</string>
+    <string name="eye_enroll_start">Start</string>
+    <string name="eye_enroll_look_camera">Keep looking at the camera...</string>
+    <string name="eye_enroll_done">Eye print added successfully!</string>
+    <string name="eye_default_name">Eye %1$d</string>
 </resources>

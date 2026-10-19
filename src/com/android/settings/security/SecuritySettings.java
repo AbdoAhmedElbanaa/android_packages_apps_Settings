@@ -27,6 +27,7 @@ import androidx.annotation.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.biometrics.combination.CombinedBiometricStatusPreferenceController;
 import com.android.settings.biometrics.face.FaceStatusPreferenceController;
+import com.android.settings.biometrics.eye.EyeStatusPreferenceController;
 import com.android.settings.biometrics.fingerprint.FingerprintStatusPreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
@@ -109,6 +110,7 @@ public class SecuritySettings extends DashboardFragment {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         final List<AbstractPreferenceController> securityPreferenceControllers = new ArrayList<>();
         securityPreferenceControllers.add(new FaceStatusPreferenceController(context, lifecycle));
+        securityPreferenceControllers.add(new EyeStatusPreferenceController(context, lifecycle));
         securityPreferenceControllers.add(new FingerprintStatusPreferenceController(
                 context, lifecycle));
         securityPreferenceControllers.add(new CombinedBiometricStatusPreferenceController(

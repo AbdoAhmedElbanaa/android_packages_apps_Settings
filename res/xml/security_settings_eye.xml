@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Copyright (C) 2026 The Android Open Source Project
+    Licensed under the Apache License, Version 2.0
+-->
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:key="security_settings_eye_page"
+    android:title="@string/security_settings_eye_preference_title">
+
+    <com.android.settingslib.widget.TopIntroPreference
+        android:key="security_settings_eye_intro"
+        android:title="@string/security_settings_eye_settings_intro" />
+
+    <PreferenceCategory
+        android:key="security_settings_eye_enrolled_category"
+        android:title="@string/security_settings_eye_category_enrolled_title" />
+
+    <PreferenceCategory
+        android:key="security_settings_eye_options_category"
+        android:title="@string/security_settings_eye_category_manage_title">
+
+        <SwitchPreferenceCompat
+            android:key="security_settings_eye_keyguard"
+            android:title="@string/security_settings_eye_keyguard_title"
+            android:summary="@string/security_settings_eye_keyguard_summary"
+            android:defaultValue="true" />
+
+        <SwitchPreferenceCompat
+            android:key="security_settings_eye_require_gaze"
+            android:title="@string/security_settings_eye_require_gaze_title"
+            android:summary="@string/security_settings_eye_require_gaze_summary"
+            android:defaultValue="true" />
+
+        <ListPreference
+            android:key="security_settings_eye_biometric_mode"
+            android:title="@string/security_settings_biometric_scan_mode_title"
+            android:summary="@string/security_settings_biometric_scan_mode_summary"
+            android:entries="@array/security_settings_biometric_scan_mode_entries"
+            android:entryValues="@array/security_settings_biometric_scan_mode_values"
+            android:defaultValue="1" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

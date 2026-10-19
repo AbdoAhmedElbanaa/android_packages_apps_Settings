@@ -29,6 +29,8 @@ import static com.android.settings.biometrics.BiometricEnrollBase.EXTRA_KEY_CHAL
 import static com.android.settings.biometrics.BiometricEnrollBase.RESULT_FINISHED;
 import static com.android.settings.biometrics.BiometricEnrollBase.RESULT_TIMEOUT;
 
+import com.android.settings.biometrics.BiometricEnrollBase;
+
 import android.app.admin.DevicePolicyManager;
 import android.app.admin.PolicyEnforcementInfo;
 import android.app.settings.SettingsEnums;
@@ -146,8 +148,16 @@ public class FaceSettings extends DashboardFragment {
         updateFaceAddAndRemovePreference(false);
     };
 
-    private final FaceSettingsEnrollButtonPreferenceController.Listener mEnrollListener = intent ->
-            startActivityForResult(intent, ENROLL_REQUEST);
+    private final FaceSettingsEnrollButtonPreferenceController.Listener mEnrollListener = intent -> {
+        intent.putExtra(BiometricEnrollBase.EXTRA_FROM_SETTINGS_SUMMARY, true);
+        if (mChallenge != 0L) {
+            intent.putExtra(BiometricEnrollBase.EXTRA_KEY_CHALLENGE, mChallenge);
+        }
+        if (mSensorId != -1) {
+            intent.putExtra(BiometricEnrollBase.EXTRA_KEY_SENSOR_ID, mSensorId);
+        }
+        startActivityForResult(intent, ENROLL_REQUEST);
+    };
 
     /**
      * @param context
@@ -318,6 +328,9 @@ public class FaceSettings extends DashboardFragment {
                 ((FaceSettingsPreferenceController) controller).setUserId(mUserId);
             } else if (controller instanceof FaceSettingsEnrollButtonPreferenceController) {
                 ((FaceSettingsEnrollButtonPreferenceController) controller).setUserId(mUserId);
+                ((FaceSettingsEnrollButtonPreferenceController) controller).setToken(mToken);
+                ((FaceSettingsEnrollButtonPreferenceController) controller).setChallenge(mChallenge);
+                ((FaceSettingsEnrollButtonPreferenceController) controller).setSensorId(mSensorId);
             } else if (controller instanceof FaceSettingsFooterPreferenceController) {
                 ((FaceSettingsFooterPreferenceController) controller).setUserId(mUserId);
             }
@@ -405,7 +418,12 @@ public class FaceSettings extends DashboardFragment {
         } else {
             mAttentionController.setToken(mToken);
             mEnrollController.setToken(mToken);
+            mEnrollController.setChallenge(mChallenge);
+            mEnrollController.setSensorId(mSensorId);
         }
+
+        final boolean hasEnrolled = mFaceManager != null && mFaceManager.hasEnrolledTemplates(mUserId);
+        updateFaceAddAndRemovePreference(hasEnrolled);
 
         if (!mFaceFeatureProvider.isAttentionSupported(getContext())) {
             removePreference(FaceSettingsAttentionPreferenceController.KEY);
@@ -438,6 +456,9 @@ public class FaceSettings extends DashboardFragment {
             if (resultCode == RESULT_TIMEOUT) {
                 setResult(resultCode, data);
                 finish();
+            } else {
+                final boolean hasEnrolled = mFaceManager != null && mFaceManager.hasEnrolledTemplates(mUserId);
+                updateFaceAddAndRemovePreference(hasEnrolled);
             }
         } else if (requestCode == BIOMETRIC_AUTH_REQUEST) {
             mBiometricsAuthenticationRequested = false;
@@ -497,6 +518,8 @@ public class FaceSettings extends DashboardFragment {
                 BiometricUtils.removeGatekeeperPasswordHandle(getPrefContext(), data);
                 mAttentionController.setToken(mToken);
                 mEnrollController.setToken(mToken);
+                mEnrollController.setChallenge(mChallenge);
+                mEnrollController.setSensorId(mSensorId);
                 mConfirmingPassword = false;
             });
         } else {
@@ -595,6 +618,11 @@ public class FaceSettings extends DashboardFragment {
             }
 
             if (enrolledFaces.size() < maxEnrollments) {
+                if (mEnrollController != null) {
+                    mEnrollController.setToken(mToken);
+                    mEnrollController.setChallenge(mChallenge);
+                    mEnrollController.setSensorId(mSensorId);
+                }
                 if (mFaceEnrollButton == null) {
                     mFaceEnrollButton = new Preference(getContext());
                     mFaceEnrollButton.setKey(PREF_KEY_FACE_ENROLL);

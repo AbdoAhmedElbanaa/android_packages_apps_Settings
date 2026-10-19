@@ -29,6 +29,7 @@ import androidx.annotation.NonNull;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
+import com.android.settings.biometrics.BiometricEnrollBase;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.flags.Flags;
 import com.android.settings.password.ChooseLockSettingsHelper;
@@ -53,6 +54,8 @@ public class FaceSettingsEnrollButtonPreferenceController extends BasePreference
 
     private int mUserId;
     private byte[] mToken;
+    private long mChallenge;
+    private int mSensorId = -1;
     private Button mButton;
     private boolean mIsClicked;
     private Listener mListener;
@@ -103,6 +106,13 @@ public class FaceSettingsEnrollButtonPreferenceController extends BasePreference
         intent.setClassName(SETTINGS_PACKAGE_NAME, FaceEnroll.class.getName());
         intent.putExtra(Intent.EXTRA_USER_ID, mUserId);
         intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, mToken);
+        intent.putExtra(BiometricEnrollBase.EXTRA_FROM_SETTINGS_SUMMARY, true);
+        if (mChallenge != 0L) {
+            intent.putExtra(BiometricEnrollBase.EXTRA_KEY_CHALLENGE, mChallenge);
+        }
+        if (mSensorId != -1) {
+            intent.putExtra(BiometricEnrollBase.EXTRA_KEY_SENSOR_ID, mSensorId);
+        }
         if (mListener != null) {
             mListener.onStartEnrolling(intent);
         } else {
@@ -133,6 +143,14 @@ public class FaceSettingsEnrollButtonPreferenceController extends BasePreference
 
     public void setToken(byte[] token) {
         mToken = token;
+    }
+
+    public void setChallenge(long challenge) {
+        mChallenge = challenge;
+    }
+
+    public void setSensorId(int sensorId) {
+        mSensorId = sensorId;
     }
 
     // Return the click state, then clear its state.

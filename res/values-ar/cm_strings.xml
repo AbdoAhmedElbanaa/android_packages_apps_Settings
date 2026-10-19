@@ -64,4 +64,27 @@
     <string name="security_settings_biometric_scan_mode_dual">الوضع المزدوج (الوجه + حيوية العين)</string>
     <string name="security_settings_face_remove_dialog_title">حذف بصمة الوجه؟</string>
     <string name="security_settings_face_remove_dialog_message">هل أنت متأكد من رغبتك في حذف قالب بصمة الوجه هذا؟</string>
+
+    <!-- Eye Unlock (بصمة العين) -->
+    <string name="security_settings_eye_preference_title">بصمة العين</string>
+    <string name="security_settings_eye_settings_intro">استخدم بصمة وقزحية العين لإلغاء قفل جهازك وتأكيد الإجراءات بأمان.</string>
+    <string name="security_settings_eye_category_enrolled_title">بصمات العين المسجلة</string>
+    <string name="security_settings_eye_add_title">إضافة بصمة عين</string>
+    <string name="security_settings_eye_category_manage_title">خيارات بصمة العين</string>
+    <string name="security_settings_eye_keyguard_title">إلغاء قفل الهاتف</string>
+    <string name="security_settings_eye_keyguard_summary">استخدام بصمة العين لإلغاء قفل جهازك</string>
+    <string name="security_settings_eye_require_gaze_title">طلب التحديق بالعين</string>
+    <string name="security_settings_eye_require_gaze_summary">لإلغاء قفل الهاتف، يجب أن تكون عيناك مفتوحتين وتنظر مباشرة إلى الشاشة</string>
+    <string name="security_settings_eye_remove_dialog_title">حذف بصمة العين؟</string>
+    <string name="security_settings_eye_remove_dialog_message">هل أنت متأكد من رغبتك في حذف قالب بصمة العين هذا؟</string>
+    <string name="security_settings_eye_preference_summary_none">لم يتم الإعداد</string>
+    <string name="security_settings_eye_preference_summary_single">تم تسجيل بصمة عين واحدة</string>
+    <string name="security_settings_eye_preference_summary_multiple">تم تسجيل %1$d بصمات للعين</string>
+    <string name="keywords_eye_settings">عين, قزحية, بصمة, أمان, فتح القفل</string>
+    <string name="eye_enroll_title">تسجيل بصمة العين</string>
+    <string name="eye_enroll_summary">امسك هاتفك على مستوى العين وانظر مباشرة إلى الكاميرا الأمامية.</string>
+    <string name="eye_enroll_start">بدء</string>
+    <string name="eye_enroll_look_camera">استمر في النظر إلى الكاميرا...</string>
+    <string name="eye_enroll_done">تم تسجيل بصمة العين بنجاح!</string>
+    <string name="eye_default_name">بصمة العين %1$d</string>
 </resources>

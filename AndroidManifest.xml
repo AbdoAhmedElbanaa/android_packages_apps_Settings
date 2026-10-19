@@ -840,6 +840,22 @@
                        android:value="@string/menu_key_security"/>
         </activity>
 
+        <activity android:name="Settings$EyeSettingsActivity"
+            android:label="@string/security_settings_eye_preference_title"
+            android:exported="true"
+            android:enableOnBackInvokedCallback="false"
+            android:theme="@style/Theme.Settings.NoActionBar"
+            android:icon="@drawable/ic_eye_24dp">
+            <intent-filter>
+                <action android:name="android.settings.EYE_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.biometrics.eye.EyeSettings" />
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                       android:value="@string/menu_key_security"/>
+        </activity>
+
         <activity android:name="Settings$FingerprintSettingsActivity"
                   android:label="@string/security_settings_fingerprint_preference_title"
                   android:exported="true"
@@ -3191,6 +3207,16 @@
                   android:screenOrientation="nosensor">
             <intent-filter>
                 <action android:name="android.settings.FACE_ENROLL"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".biometrics.eye.EyeEnrollActivity"
+                  android:exported="true"
+                  android:theme="@style/GlifV4Theme.DayNight"
+                  android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.settings.EYE_ENROLL"/>
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>

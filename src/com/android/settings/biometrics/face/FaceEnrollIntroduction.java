@@ -58,6 +58,7 @@ import com.android.settings.biometrics.BiometricEnrollIntroduction;
 import com.android.settings.biometrics.BiometricUtils;
 import com.android.settings.biometrics.MultiBiometricEnrollHelper;
 import com.android.settings.flags.Flags;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.password.SetupSkipDialog;
 import com.android.settings.utils.SensorPrivacyManagerHelper;
@@ -491,13 +492,33 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
         return findViewById(R.id.error_text);
     }
 
+    private int getMaxFacesEnrollable() {
+        final boolean isSetupWizard = WizardManagerHelper.isAnySetupWizard(getIntent());
+        final boolean isDeferredSetupWizard =
+                WizardManagerHelper.isDeferredSetupWizard(getIntent());
+        final boolean isPortalSetupWizard =
+                WizardManagerHelper.isPortalSetupWizard(getIntent());
+        if (isSetupWizard && !isDeferredSetupWizard && !isPortalSetupWizard) {
+            return getApplicationContext().getResources()
+                    .getInteger(R.integer.suw_max_faces_enrollable);
+        }
+        int max = FeatureFactory.getFeatureFactory().getFaceFeatureProvider()
+                .getMaxEnrollableCount(getApplicationContext());
+        if (max <= 0 && mFaceManager != null) {
+            final List<FaceSensorPropertiesInternal> props =
+                    mFaceManager.getSensorPropertiesInternal();
+            if (props != null && !props.isEmpty()) {
+                max = props.get(0).maxEnrollmentsPerUser;
+            }
+        }
+        return max > 0 ? max : 5;
+    }
+
     private boolean maxFacesEnrolled() {
         if (mFaceManager != null) {
             // This will need to be updated for devices with multiple face sensors.
             final int numEnrolledFaces = mFaceManager.getEnrolledFaces(mUserId).size();
-            final int maxFacesEnrollable = getApplicationContext().getResources()
-                    .getInteger(R.integer.suw_max_faces_enrollable);
-            return numEnrolledFaces >= maxFacesEnrollable;
+            return numEnrolledFaces >= getMaxFacesEnrollable();
         } else {
             return false;
         }

@@ -41,6 +41,11 @@ public class FaceFeatureProviderImpl implements FaceFeatureProvider {
     public FaceFeatureProviderImpl(@NonNull Context context) {
         final FaceManager faceManager = Utils.getFaceManagerOrNull(context);
         if (faceManager != null) {
+            final List<FaceSensorPropertiesInternal> sensors =
+                    faceManager.getSensorPropertiesInternal();
+            if (sensors != null && !sensors.isEmpty()) {
+                mMaxEnrollableCount = sensors.get(0).maxEnrollmentsPerUser;
+            }
             faceManager.addAuthenticatorsRegisteredCallback(
                     new IFaceAuthenticatorsRegisteredCallback.Stub() {
                         @Override
@@ -91,9 +96,18 @@ public class FaceFeatureProviderImpl implements FaceFeatureProvider {
 
     @Override
     public int getMaxEnrollableCount(@NonNull Context context) {
-        if (mMaxEnrollableCount == -1) {
-            Log.e(TAG, "The max enrollable count is not yet initialized.");
-            return 0;
+        if (mMaxEnrollableCount <= 0) {
+            final FaceManager faceManager = Utils.getFaceManagerOrNull(context);
+            if (faceManager != null) {
+                final List<FaceSensorPropertiesInternal> sensors =
+                        faceManager.getSensorPropertiesInternal();
+                if (sensors != null && !sensors.isEmpty()) {
+                    mMaxEnrollableCount = sensors.get(0).maxEnrollmentsPerUser;
+                }
+            }
+        }
+        if (mMaxEnrollableCount <= 0) {
+            return 5;
         }
         return mMaxEnrollableCount;
     }

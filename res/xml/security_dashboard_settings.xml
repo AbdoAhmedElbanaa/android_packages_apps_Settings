@@ -56,6 +56,13 @@
             settings:keywords="@string/keywords_face_settings" />
 
         <com.android.settingslib.RestrictedPreference
+            android:key="eye_settings"
+            android:title="@string/security_settings_eye_preference_title"
+            android:summary="@string/summary_placeholder"
+            settings:keywords="@string/keywords_eye_settings"
+            settings:controller="com.android.settings.biometrics.eye.EyeStatusPreferenceController" />
+
+        <com.android.settingslib.RestrictedPreference
             android:key="biometric_settings"
             android:title="@string/security_settings_biometric_preference_title"
             android:summary="@string/summary_placeholder"

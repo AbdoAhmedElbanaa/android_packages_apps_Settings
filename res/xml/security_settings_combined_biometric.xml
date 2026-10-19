@@ -35,6 +35,13 @@
             settings:controller="com.android.settings.biometrics.combination.BiometricFaceStatusPreferenceController" />
 
         <com.android.settingslib.RestrictedPreference
+            android:key="biometric_eye_settings"
+            android:title="@string/security_settings_eye_preference_title"
+            android:summary="@string/summary_placeholder"
+            settings:keywords="@string/keywords_eye_settings"
+            settings:controller="com.android.settings.biometrics.eye.BiometricEyeStatusPreferenceController" />
+
+        <com.android.settingslib.RestrictedPreference
             android:key="biometric_fingerprint_settings"
             android:title="@string/security_settings_fingerprint_preference_title"
             android:summary="@string/summary_placeholder"
