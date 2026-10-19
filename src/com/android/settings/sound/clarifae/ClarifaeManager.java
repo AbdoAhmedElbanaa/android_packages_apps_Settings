@@ -143,12 +143,23 @@ public class ClarifaeManager {
         }
     }
 
+    private static boolean isPackageInstalled(Context context, String pkg) {
+        if (context == null || pkg == null) return false;
+        try {
+            context.getPackageManager().getPackageInfo(pkg, 0);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
     public static boolean isClarifaeSupported(Context context) {
+        if (!isPackageInstalled(context, "org.rising.clarifae")) {
+            return false;
+        }
         File lib64 = new File("/vendor/lib64/soundfx/libclarifae.so");
         File lib32 = new File("/vendor/lib/soundfx/libclarifae.so");
-        return lib64.exists() || lib32.exists()
-                || "miatoll".equalsIgnoreCase(SystemProperties.get("ro.build.product", ""))
-                || "miatoll".equalsIgnoreCase(SystemProperties.get("ro.product.device", ""));
+        return lib64.exists() || lib32.exists();
     }
 
     public static boolean isEnabled() {

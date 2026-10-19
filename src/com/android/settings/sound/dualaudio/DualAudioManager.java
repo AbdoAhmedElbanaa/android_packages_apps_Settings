@@ -65,7 +65,20 @@ public class DualAudioManager {
         }
     }
 
+    private static boolean isPackageInstalled(Context context, String pkg) {
+        if (context == null || pkg == null) return false;
+        try {
+            context.getPackageManager().getPackageInfo(pkg, 0);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
     public static boolean isDualAudioSupported(Context context) {
+        if (!isPackageInstalled(context, "org.rising.dualaudio")) {
+            return false;
+        }
         try {
             return context.getResources().getBoolean(R.bool.config_support_dual_speaker);
         } catch (Exception e) {
