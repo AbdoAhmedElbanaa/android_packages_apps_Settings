@@ -921,8 +921,21 @@
     <!-- Face enrollment and settings -->
     <skip />
     <!-- Note: Update FaceEnrollParentalConsent.CONSENT_STRING_RESOURCES when any _consent_ strings are added or removed. -->
-    <!-- Message shown in summary field when face unlock is set up. [CHAR LIMIT=40] -->
-    <string name="security_settings_face_preference_summary">Face added</string>
+    <!-- Message showing the current number of faces set up. Shown for a menu item that launches face settings or enrollment. -->
+    <string name="security_settings_face_preference_summary">{count, plural,
+        =1      {Face added}
+        other   {# faces added}
+        }</string>
+    <!-- Label for renaming face in dialog -->
+    <string name="security_settings_face_enroll_dialog_name_label">Face name</string>
+    <!-- Title of dialog to rename enrolled face -->
+    <string name="security_settings_face_rename_dialog_title">Rename face</string>
+    <!-- Text shown when user reaches maximum enrolled faces -->
+    <string name="face_add_max">You can add up to <xliff:g id="count" example="20">%d</xliff:g> faces</string>
+    <!-- Title shown in a dialog which asks the user to confirm when a single face gets deleted. -->
+    <string name="face_delete_title">Delete \'<xliff:g id="face_id" example="Face 2">%1$s</xliff:g>\'</string>
+    <!-- Message shown in a dialog which asks the user to confirm when a single face gets deleted. -->
+    <string name="face_delete_message">This deletes the face model associated with \'<xliff:g id="face_id" example="Face 2">%1$s</xliff:g>\' stored on your device</string>
     <!-- Message shown in summary field when Face Unlock is not set up. [CHAR LIMIT=54] -->
     <string name="security_settings_face_preference_summary_none">Setup needed</string>
     <!-- Message shown in summary field when Face Unlock is not set up. [CHAR LIMIT=54] -->
@@ -14722,6 +14735,30 @@
     <string name="flash_notifications_preview">Preview</string>
     <!-- Title of the camera flash in Flash Notification page. [CHAR LIMIT=60] -->
     <string name="camera_flash_notification_title">Camera flash</string>
+    <!-- Flash Notifications Customization -->
+    <string name="flash_notifications_customization_title">Camera flash customization</string>
+    <string name="flash_notification_pulse_count_title">Flash pulse count</string>
+    <string name="flash_notification_pulse_single">1 pulse</string>
+    <string name="flash_notification_pulse_double">2 pulses</string>
+    <string name="flash_notification_pulse_multiple">%d pulses</string>
+    <string name="flash_notification_speed_title">Flash speed</string>
+    <string name="flash_notification_speed_slow">Slow (1.0 Hz)</string>
+    <string name="flash_notification_speed_normal">Normal (~1.7 Hz)</string>
+    <string name="flash_notification_speed_fast">Fast (~3.3 Hz)</string>
+    <string name="flash_notification_speed_very_fast">Very fast (5.0 Hz)</string>
+    <string name="flash_notification_speed_strobe">Strobe (10.0 Hz)</string>
+    <string name="flash_notification_frequency_title">Flash frequency (pulses/sec)</string>
+    <string name="flash_notification_on_ms_title">Flash ON duration (ms)</string>
+    <string name="flash_notification_off_ms_title">Flash OFF duration (ms)</string>
+    <string name="flash_notification_strength_title">Flashlight strength</string>
+    <string name="flash_notification_strength_max">100% (Maximum)</string>
+    <string name="flash_notification_strength_max_label">Maximum</string>
+    <string name="flash_notification_call_speed_title">Calls and alarms flash speed</string>
+    <string name="flash_notification_custom_value">Custom value…</string>
+    <string name="flash_notification_custom_timing_summary">%1$d ms ON / %2$d ms OFF</string>
+    <string name="flash_notification_unit_ms">ms</string>
+    <string name="flash_notification_unit_hz">Hz (pulses/sec)</string>
+    <string name="flash_notification_unit_pulses">pulses</string>
     <!-- Title of the screen flash in Flash Notification page. [CHAR LIMIT=60] -->
     <string name="screen_flash_notification_title">Screen flash</string>
     <!-- Title of the screen flash color selection dialog. [CHAR LIMIT=NONE] -->

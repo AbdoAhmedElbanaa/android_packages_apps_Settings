@@ -29,18 +29,25 @@ import static com.android.settings.biometrics.BiometricEnrollBase.EXTRA_KEY_CHAL
 import static com.android.settings.biometrics.BiometricEnrollBase.RESULT_FINISHED;
 import static com.android.settings.biometrics.BiometricEnrollBase.RESULT_TIMEOUT;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.admin.DevicePolicyManager;
 import android.app.admin.PolicyEnforcementInfo;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.ResourceId;
+import android.hardware.face.Face;
 import android.hardware.face.FaceManager;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.ImeAwareEditText;
+import android.widget.Toast;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
@@ -53,6 +60,7 @@ import com.android.settings.biometrics.BiometricUtils;
 import com.android.settings.biometrics.GatekeeperPasswordProvider;
 import com.android.settings.biometrics.IdentityCheckBiometricErrorDialog;
 import com.android.settings.core.SettingsBaseActivity;
+import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.flags.Flags;
 import com.android.settings.overlay.FeatureFactory;
@@ -121,20 +129,23 @@ public class FaceSettings extends DashboardFragment {
     private Preference mFaceRemoveButton;
     private Preference mFaceEnrollButton;
     private FaceFeatureProvider mFaceFeatureProvider;
+    private FaceUpdater mFaceUpdater;
 
     private boolean mConfirmingPassword;
     private boolean mBiometricsAuthenticationRequested;
     private boolean mFaceFeaturesEnabled = true;
 
     private final FaceSettingsRemoveButtonPreferenceController.Listener mRemovalListener = () -> {
-
-        // Disable the toggles until the user re-enrolls
-        for (Preference preference : mTogglePreferences) {
-            preference.setEnabled(false);
+        final boolean hasEnrolled = mFaceManager.hasEnrolledTemplates(mUserId);
+        if (!hasEnrolled) {
+            // Disable the toggles until the user re-enrolls
+            for (Preference preference : mTogglePreferences) {
+                if (preference != null) {
+                    preference.setEnabled(false);
+                }
+            }
         }
-
-        // Hide the "remove" button and show the "set up face authentication" button.
-        updateFaceAddAndRemovePreference(false);
+        updateFaceAddAndRemovePreference(hasEnrolled);
     };
 
     private final FaceSettingsEnrollButtonPreferenceController.Listener mEnrollListener = intent ->
@@ -192,6 +203,7 @@ public class FaceSettings extends DashboardFragment {
         mUserManager = context.getSystemService(UserManager.class);
         mFaceManager = context.getSystemService(FaceManager.class);
         mDevicePolicyManager = context.getSystemService(DevicePolicyManager.class);
+        mFaceUpdater = new FaceUpdater(context, mFaceManager);
 
         final SettingsActivity activity = (SettingsActivity) requireActivity();
         final String callingPackage = activity.getInitialCallingPackage();
@@ -332,9 +344,7 @@ public class FaceSettings extends DashboardFragment {
                     FaceSettings.KEY_RE_ENROLL_FACE, false);
             if (isReEnrollFaceUnlock) {
                 if (mFaceFeaturesEnabled) {
-                    if (mFaceRemoveButton.isEnabled()) {
-                        mRemoveController.onPreferenceClick(mFaceRemoveButton);
-                    }
+                    mRemoveController.showRemoveDialog();
                 } else {
                     final Button removeBtn = ((LayoutPreference) mRemoveButton).findViewById(
                             R.id.security_settings_face_settings_remove_button);
@@ -408,6 +418,9 @@ public class FaceSettings extends DashboardFragment {
             if (resultCode == RESULT_TIMEOUT) {
                 setResult(resultCode, data);
                 finish();
+            } else {
+                final boolean hasEnrolled = mFaceManager.hasEnrolledTemplates(mUserId);
+                updateFaceAddAndRemovePreference(hasEnrolled);
             }
         } else if (requestCode == BIOMETRIC_AUTH_REQUEST) {
             mBiometricsAuthenticationRequested = false;
@@ -539,13 +552,103 @@ public class FaceSettings extends DashboardFragment {
 
     private void updateFaceAddAndRemovePreference(boolean hasEnrolled) {
         if (mFaceFeaturesEnabled) {
-            mFaceEnrolledCategory.setVisible(true);
-            mFaceRemoveButton.setVisible(hasEnrolled);
-            mFaceEnrollButton.setVisible(!hasEnrolled);
+            if (mFaceEnrolledCategory != null) {
+                mFaceEnrolledCategory.removeAll();
+                mFaceEnrolledCategory.setVisible(true);
+
+                final List<Face> faces = mFaceManager.getEnrolledFaces(mUserId);
+                final int faceCount = faces.size();
+                for (int i = 0; i < faceCount; i++) {
+                    final Face face = faces.get(i);
+                    FacePreference pref = new FacePreference(getPrefContext());
+                    pref.setKey("security_settings_face_" + face.getBiometricId());
+                    pref.setTitle(face.getName());
+                    pref.setIcon(R.drawable.ic_face);
+                    pref.setFace(face);
+                    pref.setOnPreferenceClickListener(p -> {
+                        showRenameDialog(face);
+                        return true;
+                    });
+                    pref.setOnDeleteClickListener(p -> {
+                        onDeleteFaceClick(face);
+                    });
+                    mFaceEnrolledCategory.addPreference(pref);
+                }
+
+                final int maxFaces = getContext().getResources().getInteger(
+                        com.android.internal.R.integer.config_faceMaxTemplatesPerUser);
+                final boolean canEnrollMore = faceCount < maxFaces;
+                if (mFaceEnrollButton == null) {
+                    mFaceEnrollButton = new Preference(getPrefContext());
+                    mFaceEnrollButton.setKey(PREF_KEY_FACE_ENROLL);
+                    mFaceEnrollButton.setTitle(R.string.security_settings_face_add);
+                    mFaceEnrollButton.setIcon(R.drawable.ic_add_24dp);
+                    mFaceEnrollButton.setOnPreferenceClickListener(
+                            use(FaceSettingsEnrollButtonPreferenceController.class));
+                }
+                mFaceEnrollButton.setEnabled(canEnrollMore);
+                if (!canEnrollMore) {
+                    mFaceEnrollButton.setSummary(getString(R.string.face_add_max, maxFaces));
+                } else {
+                    mFaceEnrollButton.setSummary(null);
+                }
+                mFaceEnrolledCategory.addPreference(mFaceEnrollButton);
+            }
         } else {
             mEnrollButton.setVisible(!hasEnrolled);
             mRemoveButton.setVisible(hasEnrolled);
         }
+
+        if (mTogglePreferences != null) {
+            for (Preference preference : mTogglePreferences) {
+                if (preference != null) {
+                    preference.setEnabled(hasEnrolled);
+                }
+            }
+        }
+    }
+
+    public void onDeleteFaceClick(Face face) {
+        final List<Face> faces = mFaceManager.getEnrolledFaces(mUserId);
+        if (faces.size() > 1) {
+            DeleteFaceDialog.newInstance(face, this)
+                    .show(getParentFragmentManager(), DeleteFaceDialog.class.getName());
+        } else {
+            mRemoveController.showRemoveDialog();
+        }
+    }
+
+    public void deleteFace(Face face) {
+        mFaceUpdater.remove(face, mUserId, new FaceManager.RemovalCallback() {
+            @Override
+            public void onRemovalError(Face f, int errMsgId, CharSequence errString) {
+                Toast.makeText(getContext(), errString, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onRemovalSucceeded(Face f, int remaining) {
+                final boolean hasEnrolled = mFaceManager.hasEnrolledTemplates(mUserId);
+                if (!hasEnrolled) {
+                    for (Preference preference : mTogglePreferences) {
+                        if (preference != null) {
+                            preference.setEnabled(false);
+                        }
+                    }
+                }
+                updateFaceAddAndRemovePreference(hasEnrolled);
+            }
+        });
+    }
+
+    public void renameFace(int faceId, String newName) {
+        mFaceManager.rename(faceId, mUserId, newName);
+        final boolean hasEnrolled = mFaceManager.hasEnrolledTemplates(mUserId);
+        updateFaceAddAndRemovePreference(hasEnrolled);
+    }
+
+    private void showRenameDialog(Face face) {
+        RenameDialog.newInstance(face, this)
+                .show(getParentFragmentManager(), RenameDialog.class.getName());
     }
 
     private boolean isDisabledByAdmin() {
@@ -627,4 +730,123 @@ public class FaceSettings extends DashboardFragment {
                     return false;
                 }
             };
+
+    public static class RenameDialog extends InstrumentedDialogFragment {
+        private static final String KEY_FACE = "face";
+        private Face mFace;
+        private ImeAwareEditText mDialogTextField;
+        private AlertDialog mAlertDialog;
+
+        public static RenameDialog newInstance(Face face, FaceSettings target) {
+            final RenameDialog dialog = new RenameDialog();
+            final Bundle bundle = new Bundle();
+            bundle.putParcelable(KEY_FACE, face);
+            dialog.setArguments(bundle);
+            dialog.setTargetFragment(target, 0);
+            return dialog;
+        }
+
+        @Override
+        public int getMetricsCategory() {
+            return 0;
+        }
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            mFace = getArguments().getParcelable(KEY_FACE);
+            final String faceName;
+            final int textSelectionStart;
+            final int textSelectionEnd;
+            if (savedInstanceState != null) {
+                faceName = savedInstanceState.getString("faceName");
+                textSelectionStart = savedInstanceState.getInt("startSelection", -1);
+                textSelectionEnd = savedInstanceState.getInt("endSelection", -1);
+            } else {
+                faceName = null;
+                textSelectionStart = -1;
+                textSelectionEnd = -1;
+            }
+
+            mAlertDialog = new AlertDialog.Builder(getActivity())
+                    .setTitle(R.string.security_settings_face_rename_dialog_title)
+                    .setView(R.layout.face_rename_dialog)
+                    .setPositiveButton(R.string.security_settings_face_enroll_dialog_ok,
+                            (dialog, which) -> {
+                                final String newName = mDialogTextField.getText().toString();
+                                final CharSequence name = mFace.getName();
+                                if (!TextUtils.equals(newName, name)) {
+                                    FaceSettings parent = (FaceSettings) getTargetFragment();
+                                    if (parent != null) {
+                                        parent.renameFace(mFace.getBiometricId(), newName);
+                                    }
+                                }
+                                dialog.dismiss();
+                            })
+                    .setNegativeButton(R.string.cancel, null)
+                    .create();
+
+            mAlertDialog.setOnShowListener(dialog -> {
+                mDialogTextField = mAlertDialog.findViewById(R.id.face_rename_field);
+                CharSequence name = faceName == null ? mFace.getName() : faceName;
+                mDialogTextField.setText(name);
+                if (textSelectionStart != -1 && textSelectionEnd != -1) {
+                    mDialogTextField.setSelection(textSelectionStart, textSelectionEnd);
+                } else {
+                    mDialogTextField.selectAll();
+                }
+                mDialogTextField.requestFocus();
+                mDialogTextField.scheduleShowSoftInput();
+            });
+
+            return mAlertDialog;
+        }
+
+        @Override
+        public void onSaveInstanceState(Bundle outState) {
+            super.onSaveInstanceState(outState);
+            if (mDialogTextField != null) {
+                outState.putString("faceName", mDialogTextField.getText().toString());
+                outState.putInt("startSelection", mDialogTextField.getSelectionStart());
+                outState.putInt("endSelection", mDialogTextField.getSelectionEnd());
+            }
+        }
+    }
+
+    public static class DeleteFaceDialog extends InstrumentedDialogFragment {
+        private static final String KEY_FACE = "face";
+        private Face mFace;
+
+        public static DeleteFaceDialog newInstance(Face face, FaceSettings target) {
+            final DeleteFaceDialog dialog = new DeleteFaceDialog();
+            final Bundle bundle = new Bundle();
+            bundle.putParcelable(KEY_FACE, face);
+            dialog.setArguments(bundle);
+            dialog.setTargetFragment(target, 0);
+            return dialog;
+        }
+
+        @Override
+        public int getMetricsCategory() {
+            return SettingsEnums.DIALOG_FACE_REMOVE;
+        }
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            mFace = getArguments().getParcelable(KEY_FACE);
+            final String title = getString(R.string.face_delete_title, mFace.getName());
+            final String message = getString(R.string.face_delete_message, mFace.getName());
+
+            return new AlertDialog.Builder(getActivity())
+                    .setTitle(title)
+                    .setMessage(message)
+                    .setPositiveButton(R.string.delete, (dialog, which) -> {
+                        FaceSettings parent = (FaceSettings) getTargetFragment();
+                        if (parent != null) {
+                            parent.deleteFace(mFace);
+                        }
+                    })
+                    .setNegativeButton(R.string.cancel, null)
+                    .create();
+        }
+    }
 }

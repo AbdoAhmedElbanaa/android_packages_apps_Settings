@@ -43,6 +43,46 @@
             settings:controller="com.android.settings.accessibility.ScreenFlashNotificationPreferenceController" />
     </com.android.settingslib.widget.UntitledPreferenceCategory>
 
+    <PreferenceCategory
+        android:key="flash_notifications_customization_category"
+        android:title="@string/flash_notifications_customization_title">
+
+        <Preference
+            android:key="flash_notification_pulse_count"
+            android:title="@string/flash_notification_pulse_count_title"
+            settings:controller="com.android.settings.accessibility.flashnotifications.FlashNotificationPulseCountPreferenceController" />
+
+        <Preference
+            android:key="flash_notification_speed"
+            android:title="@string/flash_notification_speed_title"
+            settings:controller="com.android.settings.accessibility.flashnotifications.FlashNotificationSpeedPreferenceController" />
+
+        <Preference
+            android:key="flash_notification_frequency"
+            android:title="@string/flash_notification_frequency_title"
+            settings:controller="com.android.settings.accessibility.flashnotifications.FlashNotificationFrequencyPreferenceController" />
+
+        <Preference
+            android:key="flash_notification_on_ms"
+            android:title="@string/flash_notification_on_ms_title"
+            settings:controller="com.android.settings.accessibility.flashnotifications.FlashNotificationOnMsPreferenceController" />
+
+        <Preference
+            android:key="flash_notification_off_ms"
+            android:title="@string/flash_notification_off_ms_title"
+            settings:controller="com.android.settings.accessibility.flashnotifications.FlashNotificationOffMsPreferenceController" />
+
+        <Preference
+            android:key="flash_notification_strength"
+            android:title="@string/flash_notification_strength_title"
+            settings:controller="com.android.settings.accessibility.flashnotifications.FlashNotificationStrengthPreferenceController" />
+
+        <Preference
+            android:key="flash_notification_call_speed"
+            android:title="@string/flash_notification_call_speed_title"
+            settings:controller="com.android.settings.accessibility.flashnotifications.FlashNotificationCallSpeedPreferenceController" />
+    </PreferenceCategory>
+
     <com.android.settingslib.widget.ButtonPreference
         android:key="flash_notifications_preview"
         android:title="@string/flash_notifications_preview"

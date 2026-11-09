@@ -389,7 +389,12 @@
     <string name="security_dashboard_summary" msgid="7571035662779425918">"\"قفل الشاشة\" و\"العثور على جهازي\" وأمان التطبيقات"</string>
     <string name="safety_center_title" msgid="7732397372178774777">"الأمان والخصوصية"</string>
     <string name="safety_center_summary" msgid="3554867379951053869">"أمان التطبيقات، وقَفل الجهاز، والأذونات"</string>
-    <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"تمت إضافة بصمة وجه"</string>
+    <string name="security_settings_face_preference_summary">"{count,plural, =1{تمت إضافة بصمة وجه واحدة}zero{تمت إضافة # بصمة وجه}two{تمت إضافة بصمتَي وجه}few{تمت إضافة # بصمات أوجه}many{تمت إضافة # بصمة وجه}other{تمت إضافة # بصمة وجه}}"</string>
+    <string name="security_settings_face_enroll_dialog_name_label">اسم الوجه</string>
+    <string name="security_settings_face_rename_dialog_title">إعادة تسمية الوجه</string>
+    <string name="face_add_max">يمكنك إضافة ما يصل إلى %d أوجه</string>
+    <string name="face_delete_title">حذف \'%1$s\'</string>
+    <string name="face_delete_message">سيؤدي هذا إلى حذف نموذج الوجه المرتبط بـ \'%1$s\' والمخزّن على جهازك</string>
     <string name="security_settings_face_preference_summary_none" msgid="523320857738436024">"يجب إعداد الميزة"</string>
     <string name="security_settings_face_preference_summary_none_new" msgid="1963253146734002815">"إضافة بصمة وجه"</string>
     <string name="security_settings_face_preference_title_new" msgid="7680231874730796331">"بصمة الوجه"</string>
@@ -5858,6 +5863,30 @@
     <string name="flash_notifications_keywords" msgid="2458759275318514836">"فلاش، ضوء، ضعيف السمع، فقدان السمع"</string>
     <string name="flash_notifications_preview" msgid="5320176885050440874">"معاينة"</string>
     <string name="camera_flash_notification_title" msgid="2475084876382922732">"وميض فلاش الكاميرا"</string>
+    <!-- Flash Notifications Customization -->
+    <string name="flash_notifications_customization_title">تخصيص وميض فلاش الكاميرا</string>
+    <string name="flash_notification_pulse_count_title">عدد نبضات الفلاش</string>
+    <string name="flash_notification_pulse_single">نبضة واحدة</string>
+    <string name="flash_notification_pulse_double">نبضتان</string>
+    <string name="flash_notification_pulse_multiple">%d نبضات</string>
+    <string name="flash_notification_speed_title">سرعة وتكرار الفلاش</string>
+    <string name="flash_notification_speed_slow">بطيء (1.0 هرتز)</string>
+    <string name="flash_notification_speed_normal">عادي (~1.7 هرتز)</string>
+    <string name="flash_notification_speed_fast">سريع (~3.3 هرتز)</string>
+    <string name="flash_notification_speed_very_fast">سريع جداً (5.0 هرتز)</string>
+    <string name="flash_notification_speed_strobe">ستروب فائق (10.0 هرتز)</string>
+    <string name="flash_notification_frequency_title">تردد النبضات في الثانية</string>
+    <string name="flash_notification_on_ms_title">مدة تشغيل الفلاش (مللي ثانية)</string>
+    <string name="flash_notification_off_ms_title">مدة إيقاف الفلاش (مللي ثانية)</string>
+    <string name="flash_notification_strength_title">قوة وسطوع الفلاش</string>
+    <string name="flash_notification_strength_max">100% (الحد الأقصى)</string>
+    <string name="flash_notification_strength_max_label">الحد الأقصى</string>
+    <string name="flash_notification_call_speed_title">سرعة الفلاش للمكالمات والمنبه</string>
+    <string name="flash_notification_custom_value">قيمة مخصصة…</string>
+    <string name="flash_notification_custom_timing_summary">%1$d م.ث تشغيل / %2$d م.ث إيقاف</string>
+    <string name="flash_notification_unit_ms">مللي ثانية</string>
+    <string name="flash_notification_unit_hz">نبضة/ثانية (هرتز)</string>
+    <string name="flash_notification_unit_pulses">نبضات</string>
     <string name="screen_flash_notification_title" msgid="3773100725793316708">"وميض الشاشة"</string>
     <string name="screen_flash_notification_color_title" msgid="7213407653340970790">"لون وميض الشاشة"</string>
     <string name="screen_flash_color_blue" msgid="3585766657607931371">"أزرق"</string>

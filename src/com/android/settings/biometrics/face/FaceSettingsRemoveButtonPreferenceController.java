@@ -173,20 +173,17 @@ public class FaceSettingsRemoveButtonPreferenceController extends BasePreference
 
         @Override
         public void onRemovalSucceeded(Face face, int remaining) {
-            if (remaining == 0) {
-                final List<Face> faces = mFaceManager.getEnrolledFaces(mUserId);
-                if (!faces.isEmpty()) {
-                    if (Flags.biometricsOnboardingEducation()) {
-                        mPreference.setEnabled(true);
-                    } else {
-                        mButton.setEnabled(true);
-                    }
+            mRemoving = false;
+            final List<Face> faces = mFaceManager.getEnrolledFaces(mUserId);
+            if (!faces.isEmpty()) {
+                if (Flags.biometricsOnboardingEducation()) {
+                    if (mPreference != null) mPreference.setEnabled(true);
                 } else {
-                    mRemoving = false;
-                    mListener.onRemoved();
+                    if (mButton != null) mButton.setEnabled(true);
                 }
-            } else {
-                Log.v(TAG, "Remaining: " + remaining);
+            }
+            if (mListener != null) {
+                mListener.onRemoved();
             }
         }
     };
@@ -197,9 +194,9 @@ public class FaceSettingsRemoveButtonPreferenceController extends BasePreference
         public void onClick(DialogInterface dialog, int which) {
             if (which == DialogInterface.BUTTON_POSITIVE) {
                 if (Flags.biometricsOnboardingEducation()) {
-                    mPreference.setEnabled(false);
+                    if (mPreference != null) mPreference.setEnabled(false);
                 } else {
-                    mButton.setEnabled(false);
+                    if (mButton != null) mButton.setEnabled(false);
                 }
                 final List<Face> faces = mFaceManager.getEnrolledFaces(mUserId);
                 if (faces.isEmpty()) {
@@ -214,9 +211,9 @@ public class FaceSettingsRemoveButtonPreferenceController extends BasePreference
                 mFaceUpdater.remove(faces.get(0), mUserId, mRemovalCallback);
             } else {
                 if (Flags.biometricsOnboardingEducation()) {
-                    mPreference.setEnabled(true);
+                    if (mPreference != null) mPreference.setEnabled(true);
                 } else {
-                    mButton.setEnabled(true);
+                    if (mButton != null) mButton.setEnabled(true);
                 }
                 mRemoving = false;
             }
@@ -312,8 +309,10 @@ public class FaceSettingsRemoveButtonPreferenceController extends BasePreference
         return true;
     }
 
-    private void showRemoveDialog() {
-        mMetricsFeatureProvider.logClickedPreference(mPreference, getMetricsCategory());
+    public void showRemoveDialog() {
+        if (mPreference != null) {
+            mMetricsFeatureProvider.logClickedPreference(mPreference, getMetricsCategory());
+        }
         mRemoving = true;
         ConfirmRemoveDialog confirmRemoveDialog =
                 ConfirmRemoveDialog.newInstance(BiometricUtils.isConvenience(mFaceManager));

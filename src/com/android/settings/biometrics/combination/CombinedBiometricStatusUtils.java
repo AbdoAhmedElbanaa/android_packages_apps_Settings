@@ -142,7 +142,10 @@ public class CombinedBiometricStatusUtils {
             return mContext.getString(
                     R.string.security_settings_biometric_preference_summary_both_fp_single);
         } else if (faceEnrolled) {
-            return mContext.getString(R.string.security_settings_face_preference_summary);
+            final int numFacesEnrolled = mFaceManager != null
+                    ? mFaceManager.getEnrolledFaces(mUserId).size() : 1;
+            return StringUtil.getIcuPluralsString(mContext, numFacesEnrolled,
+                    R.string.security_settings_face_preference_summary);
         } else if (numFingerprintsEnrolled > 0) {
             return StringUtil.getIcuPluralsString(mContext, numFingerprintsEnrolled,
                     R.string.security_settings_fingerprint_preference_summary);

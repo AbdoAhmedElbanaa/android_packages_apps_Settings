@@ -79,36 +79,7 @@ public class FlashNotificationsUtil {
      * otherwise.
      */
     public static boolean isTorchAvailable(@NonNull Context context) {
-        if (sIsTorchAvailable != null) {
-            return sIsTorchAvailable;
-        }
-
-        // TODO This is duplicated logic of FlashNotificationsController.getCameraId.
-        final CameraManager cameraManager = context.getSystemService(CameraManager.class);
-        if (cameraManager == null) return false;
-        try {
-            final String[] ids = cameraManager.getCameraIdList();
-
-            for (String id : ids) {
-                final CameraCharacteristics c = cameraManager.getCameraCharacteristics(id);
-
-                final Boolean flashAvailable = c.get(CameraCharacteristics.FLASH_INFO_AVAILABLE);
-                if (flashAvailable == null) continue;
-
-                final Integer lensFacing = c.get(CameraCharacteristics.LENS_FACING);
-                if (lensFacing == null) continue;
-
-                if (flashAvailable && lensFacing == CameraCharacteristics.LENS_FACING_BACK) {
-                    sIsTorchAvailable = true;
-                    return true;
-                }
-            }
-        } catch (CameraAccessException ignored) {
-            Log.w(LOG_TAG, "Failed to get valid camera for camera flash notification.");
-            return false;
-        }
-        sIsTorchAvailable = false;
-        return false;
+        return true;
     }
 
     static ScreenFlashNotificationColor getScreenColor(@ColorInt int colorInt)

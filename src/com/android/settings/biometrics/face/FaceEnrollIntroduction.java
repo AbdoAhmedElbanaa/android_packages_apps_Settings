@@ -493,11 +493,23 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
 
     private boolean maxFacesEnrolled() {
         if (mFaceManager != null) {
-            // This will need to be updated for devices with multiple face sensors.
             final int numEnrolledFaces = mFaceManager.getEnrolledFaces(mUserId).size();
-            final int maxFacesEnrollable = getApplicationContext().getResources()
-                    .getInteger(R.integer.suw_max_faces_enrollable);
-            return numEnrolledFaces >= maxFacesEnrollable;
+            final List<FaceSensorPropertiesInternal> props =
+                    mFaceManager.getSensorPropertiesInternal();
+            int max = (props != null && !props.isEmpty()) ? props.get(0).maxEnrollmentsPerUser
+                    : getApplicationContext().getResources()
+                            .getInteger(com.android.internal.R.integer.config_faceMaxTemplatesPerUser);
+            final boolean isSetupWizard = WizardManagerHelper.isAnySetupWizard(getIntent());
+            final boolean isDeferredSetupWizard =
+                    WizardManagerHelper.isDeferredSetupWizard(getIntent());
+            final boolean isPortalSetupWizard =
+                    WizardManagerHelper.isPortalSetupWizard(getIntent());
+            if (isSetupWizard && !isDeferredSetupWizard && !isPortalSetupWizard) {
+                final int suwMax = getApplicationContext().getResources()
+                        .getInteger(R.integer.suw_max_faces_enrollable);
+                max = Math.min(max, suwMax);
+            }
+            return numEnrolledFaces >= max;
         } else {
             return false;
         }

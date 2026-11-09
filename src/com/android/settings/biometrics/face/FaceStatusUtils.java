@@ -33,6 +33,7 @@ import com.android.settings.biometrics.ParentalControlsUtils;
 import com.android.settings.flags.Flags;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.RestrictedLockUtilsInternal;
+import com.android.settingslib.utils.StringUtil;
 
 /** Utilities for face details shared between Security Settings and Safety Center. */
 public class FaceStatusUtils {
@@ -113,14 +114,18 @@ public class FaceStatusUtils {
             return mContext.getString(
                     com.android.settingslib.widget.restricted.R.string.disabled_by_admin);
         } else {
-            int summaryNoneResId = Flags.biometricsOnboardingEducation()
-                    ? R.string.security_settings_face_preference_summary_none_new
-                    : R.string.security_settings_face_preference_summary_none;
-            return mContext.getResources()
-                    .getString(
-                            hasEnrolled()
-                                    ? R.string.security_settings_face_preference_summary
-                                    : summaryNoneResId);
+            if (hasEnrolled()) {
+                final int numEnrolled = mFaceManager.getEnrolledFaces(mUserId).size();
+                return StringUtil.getIcuPluralsString(
+                        mContext,
+                        numEnrolled,
+                        R.string.security_settings_face_preference_summary);
+            } else {
+                int summaryNoneResId = Flags.biometricsOnboardingEducation()
+                        ? R.string.security_settings_face_preference_summary_none_new
+                        : R.string.security_settings_face_preference_summary_none;
+                return mContext.getString(summaryNoneResId);
+            }
         }
     }
 

@@ -17,6 +17,7 @@
 package com.android.settings.biometrics.face;
 
 import android.content.Context;
+import android.hardware.face.Face;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -28,6 +29,13 @@ import com.android.settings.R;
 import com.android.settingslib.widget.TwoTargetPreference;
 
 public class FacePreference extends TwoTargetPreference {
+
+    public interface OnDeleteClickListener {
+        void onDeleteClick(FacePreference preference);
+    }
+
+    private Face mFace;
+    private OnDeleteClickListener mOnDeleteClickListener;
 
     public FacePreference(@NonNull Context context) {
         super(context);
@@ -45,6 +53,18 @@ public class FacePreference extends TwoTargetPreference {
     public FacePreference(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr,
             int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
+    }
+
+    public void setFace(Face face) {
+        mFace = face;
+    }
+
+    public Face getFace() {
+        return mFace;
+    }
+
+    public void setOnDeleteClickListener(OnDeleteClickListener listener) {
+        mOnDeleteClickListener = listener;
     }
 
     @Override
@@ -65,6 +85,16 @@ public class FacePreference extends TwoTargetPreference {
         if (deleteIcon != null) {
             // prevent overlapped ripple effect when clicking
             deleteIcon.setBackground(null);
+            if (mFace != null) {
+                deleteIcon.setContentDescription(
+                        getContext().getString(R.string.delete)
+                                + " " + mFace.getName().toString());
+            }
+            deleteIcon.setOnClickListener(v -> {
+                if (mOnDeleteClickListener != null) {
+                    mOnDeleteClickListener.onDeleteClick(FacePreference.this);
+                }
+            });
         }
     }
 }

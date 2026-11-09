@@ -22,6 +22,7 @@ import android.app.admin.DevicePolicyManager;
 import android.app.admin.PolicyEnforcementInfo;
 import android.content.Context;
 import android.content.Intent;
+import android.hardware.face.FaceManager;
 import android.view.View;
 import android.widget.Button;
 
@@ -70,9 +71,19 @@ public class FaceSettingsEnrollButtonPreferenceController extends BasePreference
     public void updateState(@NonNull Preference preference) {
         super.updateState(preference);
         final boolean isAdminBlockingAuth = isAdminRestricted();
+        FaceManager faceManager = mContext.getSystemService(FaceManager.class);
+        final int maxFaces = mContext.getResources().getInteger(
+                com.android.internal.R.integer.config_faceMaxTemplatesPerUser);
+        final int numEnrolled = faceManager != null ? faceManager.getEnrolledFaces(mUserId).size() : 0;
+        final boolean canEnroll = !isAdminBlockingAuth && (numEnrolled < maxFaces);
 
         if (FACE_FEATURES_ENABLED) {
-            preference.setEnabled(!isAdminBlockingAuth);
+            preference.setEnabled(canEnroll);
+            if (numEnrolled >= maxFaces) {
+                preference.setSummary(mContext.getString(R.string.face_add_max, maxFaces));
+            } else {
+                preference.setSummary(null);
+            }
         } else {
             mButton = ((LayoutPreference) preference).findViewById(
                     R.id.security_settings_face_settings_enroll_button);
@@ -82,7 +93,7 @@ public class FaceSettingsEnrollButtonPreferenceController extends BasePreference
             }
 
             mButton.setOnClickListener(this);
-            mButton.setEnabled(!isAdminBlockingAuth);
+            mButton.setEnabled(canEnroll);
         }
     }
 
