@@ -27,6 +27,14 @@ import com.android.settings.accessibility.Flags
 import com.android.settings.accessibility.FlashNotificationsPreferenceFragment
 import com.android.settings.accessibility.FlashNotificationsUtil
 import com.android.settings.accessibility.FlashNotificationsUtil.State
+import com.android.settings.accessibility.flashnotifications.FlashNotificationCallSpeedPreferenceController
+import com.android.settings.accessibility.flashnotifications.FlashNotificationFrequencyPreferenceController
+import com.android.settings.accessibility.flashnotifications.FlashNotificationOffMsPreferenceController
+import com.android.settings.accessibility.flashnotifications.FlashNotificationOnMsPreferenceController
+import com.android.settings.accessibility.flashnotifications.FlashNotificationPulseCountPreferenceController
+import com.android.settings.accessibility.flashnotifications.FlashNotificationSpeedPreferenceController
+import com.android.settings.accessibility.flashnotifications.FlashNotificationStrengthPreferenceController
+import com.android.settingslib.metadata.PreferenceCategory
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.datastore.KeyValueStore
@@ -91,6 +99,47 @@ open class FlashNotificationsScreen :
                 +CameraFlashSwitchPreference()
                 +ScreenFlashSwitchPreference()
             }
+            +PreferenceCategory(
+                CUSTOMIZATION_CATEGORY_KEY,
+                R.string.flash_notifications_customization_title,
+                R.string.flash_notifications_customization_title,
+            ) += {
+                +FlashNotificationCustomPreference(
+                    "flash_notification_pulse_count",
+                    R.string.flash_notification_pulse_count_title,
+                    ::FlashNotificationPulseCountPreferenceController,
+                )
+                +FlashNotificationCustomPreference(
+                    "flash_notification_speed",
+                    R.string.flash_notification_speed_title,
+                    ::FlashNotificationSpeedPreferenceController,
+                )
+                +FlashNotificationCustomPreference(
+                    "flash_notification_frequency",
+                    R.string.flash_notification_frequency_title,
+                    ::FlashNotificationFrequencyPreferenceController,
+                )
+                +FlashNotificationCustomPreference(
+                    "flash_notification_on_ms",
+                    R.string.flash_notification_on_ms_title,
+                    ::FlashNotificationOnMsPreferenceController,
+                )
+                +FlashNotificationCustomPreference(
+                    "flash_notification_off_ms",
+                    R.string.flash_notification_off_ms_title,
+                    ::FlashNotificationOffMsPreferenceController,
+                )
+                +FlashNotificationCustomPreference(
+                    "flash_notification_strength",
+                    R.string.flash_notification_strength_title,
+                    ::FlashNotificationStrengthPreferenceController,
+                )
+                +FlashNotificationCustomPreference(
+                    "flash_notification_call_speed",
+                    R.string.flash_notification_call_speed_title,
+                    ::FlashNotificationCallSpeedPreferenceController,
+                )
+            }
             +FlashNotificationsPreviewPreference()
             +FlashNotificationsFooterPreference()
         }
@@ -145,5 +194,6 @@ open class FlashNotificationsScreen :
     companion object {
         const val KEY = "flash_notifications"
         const val CATEGORY_KEY = "flash_notifications_category"
+        const val CUSTOMIZATION_CATEGORY_KEY = "flash_notifications_customization_category"
     }
 }
